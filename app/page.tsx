@@ -26,62 +26,59 @@ export default function Page() {
     },
   ];
 
+  // State to track which track is currently playing
+  const [currentlyPlayingIndex, setCurrentlyPlayingIndex] = useState<number | null>(null);
+
   return (
     <div className="min-h-screen bg-[#0A0A0A] overflow-x-hidden">
       {/* Header - Fixed positioning to ensure it's always visible */}
-      {/* Header */}
-{/* Header - Always visible when scrolling */}
-{/* Header - Always visible when scrolling */}
-<header className="fixed top-0 left-0 right-0 z-50 w-full border-b border-[#B8860B]/20 bg-[#0A0A0A]/95 backdrop-blur supports-[backdrop-filter]:bg-[#0A0A0A]/60">
-  <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-    <div className="flex h-20 items-center justify-between">
-      <div className="flex items-center gap-2 sm:gap-4 min-w-0">
-        {/* Logo image */}
-        <img 
-          src="/images/Picture1.jpg" 
-          alt="Rebel Echo Records Logo"
-          className="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover ring-2 ring-[#B8860B]/50 shadow-lg shadow-[#B8860B]/20 flex-shrink-0"
-        />
-        <div className="flex flex-col min-w-0">
-          <span className="text-lg sm:text-2xl font-bold text-white tracking-tight truncate">
-            Rebel Echo Records
-          </span>
-          <span className="text-[10px] sm:text-xs text-[#B8860B] uppercase tracking-wider hidden sm:block truncate">
-            Home of Gospel-Core & Poetic Metal
-          </span>
+      <header className="fixed top-0 left-0 right-0 z-50 w-full border-b border-[#B8860B]/20 bg-[#0A0A0A]/95 backdrop-blur supports-[backdrop-filter]:bg-[#0A0A0A]/60">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex h-20 items-center justify-between">
+            <div className="flex items-center gap-2 sm:gap-4 min-w-0">
+              {/* Logo image */}
+              <img 
+                src="/images/Picture1.jpg" 
+                alt="Rebel Echo Records Logo"
+                className="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover ring-2 ring-[#B8860B]/50 shadow-lg shadow-[#B8860B]/20 flex-shrink-0"
+              />
+              <div className="flex flex-col min-w-0">
+                <span className="text-lg sm:text-2xl font-bold text-white tracking-tight truncate">
+                  Rebel Echo Records
+                </span>
+                <span className="text-[10px] sm:text-xs text-[#B8860B] uppercase tracking-wider hidden sm:block truncate">
+                  Home of Gospel-Core & Poetic Metal
+                </span>
+              </div>
+            </div>
+            
+            {/* Navigation - Improved for mobile */}
+            <nav className="flex items-center gap-2 sm:gap-4 md:gap-6 ml-2 sm:ml-0 flex-shrink-0">
+              <a 
+                href="#features" 
+                className="text-xs sm:text-sm font-medium text-gray-300 transition-colors whitespace-nowrap hover:text-[#B8860B] px-2 sm:px-0"
+              >
+                Albums
+              </a>
+              <a 
+                href="#benefits" 
+                className="text-xs sm:text-sm font-medium text-gray-300 transition-colors whitespace-nowrap hover:text-[#B8860B] px-2 sm:px-0"
+              >
+                Tracks
+              </a>
+              <a 
+                href="#footer" 
+                className="text-xs sm:text-sm font-medium text-gray-300 transition-colors whitespace-nowrap hover:text-[#B8860B] px-2 sm:px-0"
+              >
+                Contact
+              </a>
+            </nav>
+          </div>
         </div>
-      </div>
-      
-      {/* Navigation - Improved for mobile */}
-      <nav className="flex items-center gap-2 sm:gap-4 md:gap-6 ml-2 sm:ml-0 flex-shrink-0">
-        <a 
-          href="#features" 
-          className="text-xs sm:text-sm font-medium text-gray-300 transition-colors whitespace-nowrap hover:text-[#B8860B] px-2 sm:px-0"
-        >
-          Albums
-        </a>
-        <a 
-          href="#benefits" 
-          className="text-xs sm:text-sm font-medium text-gray-300 transition-colors whitespace-nowrap hover:text-[#B8860B] px-2 sm:px-0"
-        >
-          Tracks
-        </a>
-        <a 
-          href="#footer" 
-          className="text-xs sm:text-sm font-medium text-gray-300 transition-colors whitespace-nowrap hover:text-[#B8860B] px-2 sm:px-0"
-        >
-          Contact
-        </a>
-      </nav>
-    </div>
-  </div>
-</header>
+      </header>
 
-
-{/* Add this spacer to prevent content from hiding under the fixed header */}
-<div className="h-20 w-full"></div>
-      {/* Spacer div to push content below fixed header */}
-    
+      {/* Add this spacer to prevent content from hiding under the fixed header */}
+      <div className="h-20 w-full"></div>
 
       {/* Hero Section */}
       <section className="relative w-full overflow-hidden pt-6 pb-10 sm:pt-10 sm:pb-16 lg:pt-12 lg:pb-20" style={{ backgroundColor: '#0A0A0A' }}>
@@ -315,7 +312,15 @@ export default function Page() {
           {/* Judy Briggs Tracks Grid - Responsive columns */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 max-w-5xl mx-auto px-4 sm:px-0">
             {tracks.map((track, index) => (
-              <AudioCard key={index} track={track} index={index} />
+              <AudioCard 
+                key={index} 
+                track={track} 
+                index={index}
+                isPlaying={currentlyPlayingIndex === index}
+                onPlayPause={(playing) => {
+                  setCurrentlyPlayingIndex(playing ? index : null);
+                }}
+              />
             ))}
           </div>
 
@@ -355,11 +360,20 @@ export default function Page() {
    🎵 PROFESSIONAL AUDIO CARD COMPONENT - FULLY RESPONSIVE
 ========================================================= */
 
-function AudioCard({ track, index }: { track: Track; index: number }) {
+function AudioCard({ 
+  track, 
+  index, 
+  isPlaying, 
+  onPlayPause 
+}: { 
+  track: Track; 
+  index: number; 
+  isPlaying: boolean;
+  onPlayPause: (playing: boolean) => void;
+}) {
   const audioRef = useRef<HTMLAudioElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
 
-  const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [duration, setDuration] = useState(0);
   const [current, setCurrent] = useState(0);
@@ -380,7 +394,10 @@ function AudioCard({ track, index }: { track: Track; index: number }) {
 
     const updateTime = () => setCurrent(audio.currentTime);
     const loaded = () => setDuration(audio.duration);
-    const ended = () => setIsPlaying(false);
+    const ended = () => {
+      onPlayPause(false);
+      setCurrent(0);
+    };
 
     audio.addEventListener("timeupdate", updateTime);
     audio.addEventListener("loadedmetadata", loaded);
@@ -391,18 +408,25 @@ function AudioCard({ track, index }: { track: Track; index: number }) {
       audio.removeEventListener("loadedmetadata", loaded);
       audio.removeEventListener("ended", ended);
     };
-  }, []);
+  }, [onPlayPause]);
 
-  const togglePlay = () => {
+  // Handle play/pause based on isPlaying prop
+  useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
-    
+
     if (isPlaying) {
-      audio.pause();
+      audio.play().catch(error => {
+        console.log("Playback failed:", error);
+        onPlayPause(false);
+      });
     } else {
-      audio.play();
+      audio.pause();
     }
-    setIsPlaying(!isPlaying);
+  }, [isPlaying, onPlayPause]);
+
+  const togglePlay = () => {
+    onPlayPause(!isPlaying);
   };
 
   const stopAudio = () => {
@@ -411,7 +435,7 @@ function AudioCard({ track, index }: { track: Track; index: number }) {
     
     audio.pause();
     audio.currentTime = 0;
-    setIsPlaying(false);
+    onPlayPause(false);
   };
 
   const toggleMute = () => {
