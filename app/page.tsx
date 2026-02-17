@@ -16,7 +16,7 @@ export default function Page() {
       title: "Hanging Up The Orange Apron",
       artist: "J'Soul",
       src: "/Songs/sng1.mp3",
-      thumbnail: "/images/sng1.png",
+      thumbnail: "/images/sng1.PNG",
     },
     {
       title: "Butterflies and Second Chances",
