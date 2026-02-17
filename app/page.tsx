@@ -26,6 +26,9 @@ export default function Page() {
     },
   ];
 
+  // State to track which audio is currently playing
+  const [currentlyPlaying, setCurrentlyPlaying] = useState<number | null>(null);
+
   return (
     <div className="min-h-screen bg-[#0A0A0A] overflow-x-hidden">
       {/* Header - Fixed positioning to ensure it's always visible */}
@@ -255,7 +258,7 @@ export default function Page() {
                     {/* Main image container */}
                     <div className="relative bg-gradient-to-br from-[#B8860B] to-[#800080] p-1 rounded-2xl shadow-2xl">
                       <div className="bg-[#111111] rounded-2xl overflow-hidden">
-                        <div className="aspect-[3/4] relative">
+                        <div className="aspect-[4/4] relative">
                           <img
                             src="/images/Picture2.png"
                             alt="J'Soul - Artist at Rebel Echo Records"
@@ -340,7 +343,14 @@ export default function Page() {
           {/* Judy Briggs Tracks Grid - Responsive columns */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 max-w-5xl mx-auto px-4 sm:px-0">
             {tracks.map((track, index) => (
-              <AudioCard key={index} track={track} index={index} />
+              <AudioCard 
+                key={index} 
+                track={track} 
+                index={index}
+                isPlaying={currentlyPlaying === index}
+                onPlay={() => setCurrentlyPlaying(index)}
+                onStop={() => setCurrentlyPlaying(null)}
+              />
             ))}
           </div>
 
@@ -396,11 +406,22 @@ export default function Page() {
    🎵 PROFESSIONAL AUDIO CARD COMPONENT - FULLY RESPONSIVE
 ========================================================= */
 
-function AudioCard({ track, index }: { track: Track; index: number }) {
+function AudioCard({ 
+  track, 
+  index, 
+  isPlaying, 
+  onPlay, 
+  onStop 
+}: { 
+  track: Track; 
+  index: number;
+  isPlaying: boolean;
+  onPlay: () => void;
+  onStop: () => void;
+}) {
   const audioRef = useRef<HTMLAudioElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
 
-  const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [duration, setDuration] = useState(0);
   const [current, setCurrent] = useState(0);
@@ -414,14 +435,17 @@ function AudioCard({ track, index }: { track: Track; index: number }) {
     return `${m}:${s}`;
   };
 
-  // load metadata
+  // load metadata and handle playback
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
 
     const updateTime = () => setCurrent(audio.currentTime);
     const loaded = () => setDuration(audio.duration);
-    const ended = () => setIsPlaying(false);
+    const ended = () => {
+      onStop();
+      setCurrent(0);
+    };
 
     audio.addEventListener("timeupdate", updateTime);
     audio.addEventListener("loadedmetadata", loaded);
@@ -432,18 +456,29 @@ function AudioCard({ track, index }: { track: Track; index: number }) {
       audio.removeEventListener("loadedmetadata", loaded);
       audio.removeEventListener("ended", ended);
     };
-  }, []);
+  }, [onStop]);
 
-  const togglePlay = () => {
+  // Handle play/pause based on isPlaying prop
+  useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
 
     if (isPlaying) {
-      audio.pause();
+      audio.play().catch(error => {
+        console.log("Playback failed:", error);
+        onStop();
+      });
     } else {
-      audio.play();
+      audio.pause();
     }
-    setIsPlaying(!isPlaying);
+  }, [isPlaying, onStop]);
+
+  const togglePlay = () => {
+    if (isPlaying) {
+      onStop();
+    } else {
+      onPlay();
+    }
   };
 
   const stopAudio = () => {
@@ -452,7 +487,7 @@ function AudioCard({ track, index }: { track: Track; index: number }) {
 
     audio.pause();
     audio.currentTime = 0;
-    setIsPlaying(false);
+    onStop();
   };
 
   const toggleMute = () => {
