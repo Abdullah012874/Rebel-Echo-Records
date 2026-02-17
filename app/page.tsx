@@ -13,10 +13,10 @@ export default function Page() {
   // 🔥 ONLY EDIT HERE — PUT YOUR SONG URLs
   const tracks: Track[] = [
     {
-      title: "Backroads and Butterflies",
+      title: "Hanging Up The Orange Apron",
       artist: "J'Soul",
-      src: "/Songs/song1.mpeg",
-      thumbnail: "/images/Picture6.png",
+      src: "/Songs/sng1.mp3",
+      thumbnail: "/images/sng1.png",
     },
     {
       title: "Butterflies and Second Chances",
@@ -26,59 +26,121 @@ export default function Page() {
     },
   ];
 
-  // State to track which track is currently playing
-  const [currentlyPlayingIndex, setCurrentlyPlayingIndex] = useState<number | null>(null);
-
   return (
     <div className="min-h-screen bg-[#0A0A0A] overflow-x-hidden">
       {/* Header - Fixed positioning to ensure it's always visible */}
+      {/* Header */}
+      {/* Header - Always visible when scrolling */}
+      {/* Header - Always visible when scrolling */}
       <header className="fixed top-0 left-0 right-0 z-50 w-full border-b border-[#B8860B]/20 bg-[#0A0A0A]/95 backdrop-blur supports-[backdrop-filter]:bg-[#0A0A0A]/60">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex h-20 items-center justify-between">
-            <div className="flex items-center gap-2 sm:gap-4 min-w-0">
-              {/* Logo image */}
-              <img 
-                src="/images/Picture1.jpg" 
+          <div className="flex h-24 items-center justify-between">
+            <div className="flex items-center gap-4 sm:gap-6 min-w-0">
+              {/* Larger Logo image */}
+              <img
+                src="/images/Picture1.jpg"
                 alt="Rebel Echo Records Logo"
-                className="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover ring-2 ring-[#B8860B]/50 shadow-lg shadow-[#B8860B]/20 flex-shrink-0"
+                className="h-14 w-14 sm:h-16 sm:w-16 rounded-full object-cover ring-2 ring-[#B8860B]/50 shadow-lg shadow-[#B8860B]/20 flex-shrink-0"
               />
               <div className="flex flex-col min-w-0">
-                <span className="text-lg sm:text-2xl font-bold text-white tracking-tight truncate">
+                <span className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight truncate">
                   Rebel Echo Records
                 </span>
-                <span className="text-[10px] sm:text-xs text-[#B8860B] uppercase tracking-wider hidden sm:block truncate">
+                <span className="text-xs sm:text-sm text-[#B8860B] uppercase tracking-wider hidden sm:block truncate">
                   Home of Gospel-Core & Poetic Metal
                 </span>
               </div>
             </div>
-            
-            {/* Navigation - Improved for mobile */}
-            <nav className="flex items-center gap-2 sm:gap-4 md:gap-6 ml-2 sm:ml-0 flex-shrink-0">
-              <a 
-                href="#features" 
+
+            {/* Desktop Navigation - Hidden on mobile */}
+            <nav className="hidden md:flex items-center gap-4 md:gap-6 ml-2 sm:ml-0 flex-shrink-0">
+              <a
+                href="#features"
                 className="text-xs sm:text-sm font-medium text-gray-300 transition-colors whitespace-nowrap hover:text-[#B8860B] px-2 sm:px-0"
               >
                 Albums
               </a>
-              <a 
-                href="#benefits" 
+              <a
+                href="#benefits"
                 className="text-xs sm:text-sm font-medium text-gray-300 transition-colors whitespace-nowrap hover:text-[#B8860B] px-2 sm:px-0"
               >
                 Tracks
               </a>
-              <a 
-                href="#footer" 
+              <a
+                href="#footer"
                 className="text-xs sm:text-sm font-medium text-gray-300 transition-colors whitespace-nowrap hover:text-[#B8860B] px-2 sm:px-0"
               >
                 Contact
               </a>
             </nav>
+
+            {/* Mobile Menu Button (3 dots) - Only visible on mobile */}
+            <div className="relative md:hidden">
+              <button
+                className="flex items-center justify-center w-10 h-10 rounded-full hover:bg-[#B8860B]/10 transition-colors"
+                onClick={() => {
+                  const menu = document.getElementById('mobile-menu');
+                  if (menu) {
+                    menu.classList.toggle('hidden');
+                  }
+                }}
+              >
+                <svg className="w-6 h-6 text-[#B8860B]" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+                </svg>
+              </button>
+
+              {/* Mobile Navigation Menu */}
+              <div
+                id="mobile-menu"
+                className="hidden absolute right-0 mt-2 w-48 py-2 bg-[#0A0A0A] border border-[#B8860B]/20 rounded-lg shadow-xl"
+              >
+                <a
+                  href="#features"
+                  className="block px-4 py-2 text-sm text-gray-300 hover:bg-[#B8860B]/10 hover:text-[#B8860B] transition-colors"
+                  onClick={() => {
+                    const menu = document.getElementById('mobile-menu');
+                    if (menu) {
+                      menu.classList.add('hidden');
+                    }
+                  }}
+                >
+                  Albums
+                </a>
+                <a
+                  href="#benefits"
+                  className="block px-4 py-2 text-sm text-gray-300 hover:bg-[#B8860B]/10 hover:text-[#B8860B] transition-colors"
+                  onClick={() => {
+                    const menu = document.getElementById('mobile-menu');
+                    if (menu) {
+                      menu.classList.add('hidden');
+                    }
+                  }}
+                >
+                  Tracks
+                </a>
+                <a
+                  href="#footer"
+                  className="block px-4 py-2 text-sm text-gray-300 hover:bg-[#B8860B]/10 hover:text-[#B8860B] transition-colors"
+                  onClick={() => {
+                    const menu = document.getElementById('mobile-menu');
+                    if (menu) {
+                      menu.classList.add('hidden');
+                    }
+                  }}
+                >
+                  Contact
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </header>
 
       {/* Add this spacer to prevent content from hiding under the fixed header */}
       <div className="h-20 w-full"></div>
+      {/* Spacer div to push content below fixed header */}
+
 
       {/* Hero Section */}
       <section className="relative w-full overflow-hidden pt-6 pb-10 sm:pt-10 sm:pb-16 lg:pt-12 lg:pb-20" style={{ backgroundColor: '#0A0A0A' }}>
@@ -89,61 +151,47 @@ export default function Page() {
         </div>
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-balance text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight text-white mb-2">
+            {/* Main Title - Significantly increased */}
+            <h1 className="text-balance text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-7xl font-bold tracking-tight text-white mt-7 sm:mt-8 md:mt-10 lg:mt-8 mb-4">
               Rebel Echo Records
             </h1>
-            <p className="text-xl sm:text-2xl md:text-3xl text-[#B8860B] mb-4 px-4">
-              Home of Gospel-Core and Poetic Metal
+            <br />
+
+            {/* Subtitle - Adjusted proportionally */}
+
+            <p className="text-sm sm:text-base text-gray-300 leading-relaxed mb-4 text-center">
+              <span className="font-semibold text-[#B8860B]">Rebel Echo Records (RER)</span> is an independent label rooted in conviction, resilience, and artistic truth.
+
+              Home of <span className="font-semibold text-[#800080]">J'Soul</span>, featuring new and upcoming artists, including <span className="font-semibold text-[#B8860B]">Judy Briggs</span>.
+
+              RER exists at the intersection of faith, fire, vulnerability, and strength. We build music that confronts, restores, and refuses to compromise.
             </p>
-            
-            {/* Logo Section - Responsive sizing */}
+
+            <br />
+            {/* J'Soul section - Larger and more prominent */}
+            <p className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-semibold text-[#B8860B] mb-6">
+              Home of J'Soul
+            </p>
+
+            {/* Logo Section - Significantly increased */}
             <div className="flex flex-col items-center justify-center gap-4 sm:gap-6 mb-2">
               <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 md:gap-16">
                 <div className="flex flex-col items-center">
-                  <img 
-                    src="/images/Picture3-removebg-preview.png" 
+                  <img
+                    src="/images/Picture3-removebg-preview.png"
                     alt="J'Soul Logo"
-                    className="h-24 w-24 sm:h-28 sm:w-28 md:h-32 md:w-32 lg:h-40 lg:w-40 object-contain filter drop-shadow-[0_0_15px_rgba(184,134,11,0.3)]"
+                    className="h-24 w-24 sm:h-28 sm:w-28 md:h-32 md:w-32 lg:h-40 lg:w-40 xl:h-48 xl:w-48 object-contain filter drop-shadow-[0_0_20px_rgba(184,134,11,0.4)] hover:drop-shadow-[0_0_30px_rgba(184,134,11,0.6)] transition-all duration-300"
                   />
                 </div>
               </div>
             </div>
-            
-            {/* Subtext */}
+
+            {/* Removed empty divs but kept structure clean */}
             <div className="mt-4 space-y-2 px-4">
-              <p className="text-xl sm:text-2xl md:text-3xl font-semibold text-[#B8860B]">
-                Home of J'Soul
-              </p>
-              <p className="text-base sm:text-lg md:text-xl text-gray-300">
-                Featuring new and upcoming artists: Judy Briggs
-              </p>
+              {/* Empty div removed - kept for potential future content */}
             </div>
-            
-            {/* Buttons - Stack on mobile, row on larger screens */}
-            <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
-              <button 
-                onClick={() => {
-                  document.getElementById('benefits')?.scrollIntoView({ 
-                    behavior: 'smooth',
-                    block: 'start'
-                  });
-                }}
-                className="w-full sm:w-auto rounded-lg bg-[#B8860B] px-6 sm:px-8 py-3 text-sm sm:text-base font-semibold text-black transition-all hover:bg-[#DAA520]"
-              >
-                Listen To Track
-              </button>
-              <button 
-                onClick={() => {
-                  document.getElementById('features')?.scrollIntoView({ 
-                    behavior: 'smooth',
-                    block: 'start'
-                  });
-                }}
-                className="w-full sm:w-auto rounded-lg border-2 border-[#800080] px-6 sm:px-8 py-3 text-sm sm:text-base font-semibold text-white transition-all hover:border-[#B8860B] hover:bg-white/10"
-              >
-                Learn More
-              </button>
-            </div>
+
+            {/* Buttons section commented out but available if needed */}
           </div>
         </div>
       </section>
@@ -152,144 +200,124 @@ export default function Page() {
       <section id="features" className="w-full py-12 sm:py-16 lg:py-20 bg-[#0A0A0A] scroll-mt-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Label Overview - Now stacks on mobile, side by side on desktop */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center mb-12 lg:mb-16">
-            {/* Left side - Text Content */}
-            <div className="order-2 lg:order-1">
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-white mb-4 sm:mb-6">
-                REBEL ECHO RECORDS
-              </h2>
-              <p className="text-base sm:text-lg text-gray-400 max-w-2xl mb-6 sm:mb-8">
-                Home of Gospel-Core and Poetic Metal
-              </p>
-              
-              {/* Overview Card */}
-              <div className="bg-gradient-to-r from-[#800080]/10 to-transparent p-4 sm:p-6 lg:p-8 rounded-2xl border border-[#B8860B]/20">
-                <p className="text-sm sm:text-base text-gray-300 leading-relaxed mb-4">
-                  <span className="font-semibold text-[#B8860B]">Rebel Echo Records (RER)</span> is an independent label rooted in conviction, resilience, and artistic truth.
-                </p>
-                <p className="text-sm sm:text-base text-gray-300 leading-relaxed mb-4">
-                  Home of <span className="font-semibold text-[#800080]">J'Soul</span>, featuring new and upcoming artists, including <span className="font-semibold text-[#B8860B]">Judy Briggs</span>.
-                </p>
-                <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
-                  RER exists at the intersection of faith, fire, vulnerability, and strength. We build music that confronts, restores, and refuses to compromise.
-                </p>
-              </div>
-            </div>
+          <div className="min-h-screen flex items-center justify-center p-4 sm:p-6 lg:p-8">
+            <div className="w-full max-w-4xl mx-auto">
+              <div className="space-y-8 lg:space-y-12">
 
-            {/* Right side - Artist Image Section */}
-            <div className="order-1 lg:order-2 flex justify-center lg:justify-end mb-6 lg:mb-0">
-              <div className="relative w-full max-w-md lg:max-w-2xl">
-                {/* Background gradient effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-[#B8860B] to-[#800080] rounded-3xl transform -rotate-1 scale-105 blur-sm opacity-20"></div>
-                
-                {/* Main image container */}
-                <div className="relative bg-gradient-to-br from-[#B8860B] to-[#800080] p-1 rounded-2xl shadow-2xl">
-                  <div className="bg-[#111111] rounded-2xl overflow-hidden">
-                    <div className="aspect-[3/4] relative">
-                      <img 
-                        src="/images/Picture2.png" 
-                        alt="J'Soul - Artist at Rebel Echo Records"
-                        className="w-full h-full object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/90 via-transparent to-transparent"></div>
+                {/* Press Release Section - Top */}
+                <div>
+  <div className="bg-[#111111] border border-[#B8860B]/20 rounded-2xl p-4 sm:p-6 md:p-8 lg:p-10">
+    <div className="text-center mb-6 sm:mb-8">
+      <span className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 bg-[#800080]/20 text-[#B8860B] font-semibold rounded-full text-xs sm:text-sm mb-3 sm:mb-4">
+        FOR IMMEDIATE RELEASE
+      </span>
+      <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-3 sm:mb-4 px-2">
+        J'Soul Announces "Poetic Metal" – A Genre-Defying Testament of Faith, Resilience, and Family
+      </h3>
+    </div>
+
+    <div className="space-y-4 sm:space-y-6 text-gray-300 max-w-4xl mx-auto">
+      <p className="text-base sm:text-lg leading-relaxed text-justify">
+        <span className="font-semibold text-[#B8860B]">Rebel Echo Records</span> proudly announces the upcoming release of <span className="font-semibold text-[#800080]">Poetic Metal</span>, arriving <span className="font-semibold text-[#B8860B]">March 10, 2026</span>.
+      </p>
+
+      <p className="text-sm sm:text-base leading-relaxed text-justify">
+        Blending Christian metal, poetic lyricism, rap influence, and emotionally grounded storytelling, Poetic Metal explores endurance in relationships, spiritual guidance through adversity, mental health recovery, and unwavering family bonds.
+      </p>
+      
+      {/* Spotify Link with Logo */}
+      <div className="flex items-center justify-center gap-3 mt-6 pt-4 border-t border-[#B8860B]/20">
+        {/* PASTE YOUR SPOTIFY LOGO URL BELOW */}
+        <img 
+          src="/images/spotify.jpeg" 
+          alt="Spotify"
+          className="w-20 h-20 object-contain"
+        />
+        <a 
+          href="https://open.spotify.com/artist/3IeyA0cRJhNgtF9Jp1HBFN?si=K0AXhXkLSkqStHqHZb2xqA&nd=1&dlsi=2428ccce79064dd8" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="text-[#1DB954] hover:text-white transition-colors duration-300 text-sm sm:text-base font-medium"
+        >
+          Listen on Spotify →
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+                {/* Artist Image Section - Bottom */}
+                <div className="flex justify-center items-center">
+                  <div className="relative w-full max-w-md lg:max-w-2xl mx-auto">
+                    {/* Background gradient effect */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#B8860B] to-[#800080] rounded-3xl transform -rotate-1 scale-105 blur-sm opacity-20"></div>
+
+                    {/* Main image container */}
+                    <div className="relative bg-gradient-to-br from-[#B8860B] to-[#800080] p-1 rounded-2xl shadow-2xl">
+                      <div className="bg-[#111111] rounded-2xl overflow-hidden">
+                        <div className="aspect-[3/4] relative">
+                          <img
+                            src="/images/Picture2.png"
+                            alt="J'Soul - Artist at Rebel Echo Records"
+                            className="w-full h-full object-cover"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/90 via-transparent to-transparent"></div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
+
               </div>
             </div>
           </div>
 
-          {/* Press Release Section */}
-          <div className="mb-12 lg:mb-16">
-            <div className="bg-[#111111] border border-[#B8860B]/20 rounded-2xl p-4 sm:p-6 md:p-8 lg:p-10">
-              <div className="text-center mb-6 sm:mb-8">
-                <span className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 bg-[#800080]/20 text-[#B8860B] font-semibold rounded-full text-xs sm:text-sm mb-3 sm:mb-4">
-                  FOR IMMEDIATE RELEASE
-                </span>
-                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-3 sm:mb-4 px-2">
-                  J'Soul Announces "Poetic Metal" – A Genre-Defying Testament of Faith, Resilience, and Family
-                </h3>
-              </div>
-              
-              <div className="space-y-4 sm:space-y-6 text-gray-300 max-w-4xl mx-auto">
-                <p className="text-base sm:text-lg leading-relaxed">
-                  <span className="font-semibold text-[#B8860B]">Rebel Echo Records</span> proudly announces the upcoming release of <span className="font-semibold text-[#800080]">Poetic Metal</span>, arriving <span className="font-semibold text-[#B8860B]">March 10, 2026</span>.
-                </p>
-                
-                <p className="text-sm sm:text-base leading-relaxed">
-                  Blending Christian metal, poetic lyricism, rap influence, and emotionally grounded storytelling, Poetic Metal explores endurance in relationships, spiritual guidance through adversity, mental health recovery, and unwavering family bonds.
-                </p>
-                
-                {/* Grid - 1 column on mobile, 2 on larger screens */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 my-6 sm:my-8">
-                  <div className="bg-[#0A0A0A] p-4 sm:p-5 rounded-xl border border-[#800080]/30">
-                    <span className="block text-base sm:text-lg font-semibold text-[#B8860B] mb-2">"Enigma"</span>
-                    <p className="text-xs sm:text-sm text-gray-400">honors quiet brilliance</p>
-                  </div>
-                  <div className="bg-[#0A0A0A] p-4 sm:p-5 rounded-xl border border-[#800080]/30">
-                    <span className="block text-base sm:text-lg font-semibold text-[#B8860B] mb-2">"The Devil Dealt Me Aces"</span>
-                    <p className="text-xs sm:text-sm text-gray-400">celebrates earned victory</p>
-                  </div>
-                  <div className="bg-[#0A0A0A] p-4 sm:p-5 rounded-xl border border-[#800080]/30">
-                    <span className="block text-base sm:text-lg font-semibold text-[#B8860B] mb-2">"The Cost of Staying"</span>
-                    <p className="text-xs sm:text-sm text-gray-400">examines devotion under strain</p>
-                  </div>
-                  <div className="bg-[#0A0A0A] p-4 sm:p-5 rounded-xl border border-[#800080]/30">
-                    <span className="block text-base sm:text-lg font-semibold text-[#B8860B] mb-2">"Premeditated"</span>
-                    <p className="text-xs sm:text-sm text-gray-400">dedicated to mental health professionals</p>
-                  </div>
+          <br />
+          <br /><br />
+          {/* AI & Innovation Section */}
+          <div className="relative overflow-hidden rounded-2xl bg-[#111111] border border-[#B8860B]/20 p-4 sm:p-6 md:p-8 lg:p-10">
+            {/* Decorative elements */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-[#B8860B]/10 rounded-full blur-3xl" />
+            <div className="absolute bottom-0 left-0 w-48 h-48 bg-[#800080]/20 rounded-full blur-3xl" />
+
+            {/* Simple unified content with headings */}
+            <div className="relative space-y-4 sm:space-y-6 max-w-4xl mx-auto">
+              {/* Professional image on top */}
+              <div className="flex justify-center mb-6 sm:mb-8">
+                <div className="relative w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-full overflow-hidden border-2 border-[#B8860B]/30 shadow-xl shadow-[#B8860B]/10 ring-4 ring-[#B8860B]/20">
+                  <img
+                    src="/images/suno.jpeg"
+                    alt="Artist profile"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
-                
-                <p className="text-sm sm:text-base leading-relaxed">
-                  Releasing on March 10, a date of personal significance, Poetic Metal is a declaration of strength, accountability, and purpose.
+              </div>
+
+              <div>
+                <h4 className="text-sm sm:text-base font-bold text-[#B8860B] mb-3 sm:mb-4 flex items-center gap-2 tracking-wider">
+                  <span className="text-[#B8860B]">🎵</span> SUNO ACKNOWLEDGMENT
+                </h4>
+                <p className="text-sm sm:text-base text-gray-300 leading-relaxed text-justify">
+                  This album was brought to life with the assistance of AI tools, including Suno. As a songwriter, I found in this technology a way to translate written conviction into fully realized soundscapes. Innovation does not replace artistry—it amplifies it.
                 </p>
               </div>
-              
-              {/* Divider */}
-              <div className="my-6 sm:my-8 border-t border-[#B8860B]/20"></div>
-              
-              {/* AI & Innovation Section - Stack on mobile */}
-              <div className="space-y-4 sm:space-y-6">
-                {/* Suno Acknowledgment */}
-                <div className="bg-gradient-to-r from-[#800080]/10 to-transparent p-4 sm:p-6 rounded-xl">
-                  <h4 className="text-base sm:text-lg font-semibold text-white mb-3 flex items-center gap-2">
-                    <span className="text-xl sm:text-2xl text-[#B8860B]">🎵</span> Suno Acknowledgment
-                  </h4>
-                  <div className="space-y-2 sm:space-y-3 text-xs sm:text-sm text-gray-400 italic">
-                    <p>
-                      This album was brought to life with the assistance of AI tools, including Suno.
-                    </p>
-                    <p>
-                      As a songwriter, I found in this technology a way to translate written conviction into fully realized soundscapes.
-                    </p>
-                    <p className="font-medium text-[#B8860B] not-italic">
-                      Innovation does not replace artistry. It amplifies it.
-                    </p>
-                  </div>
-                </div>
 
-                {/* AI Statement */}
-                <div className="bg-[#111111] border-l-4 border-[#B8860B] p-4 sm:p-6 rounded-r-xl">
-                  <p className="text-lg sm:text-xl font-semibold text-white mb-2">AI</p>
-                  <p className="text-xs sm:text-sm text-gray-300 mb-3">
-                    Because that's the truth. A piano doesn't make someone a composer. A studio doesn't make someone a producer. A tool does not erase authorship.
-                  </p>
-                </div>
+              <div>
+                <h4 className="text-sm sm:text-base font-bold text-[#B8860B] mb-3 sm:mb-4 tracking-wider">
+                  AI—LET'S TALK ABOUT IT
+                </h4>
+                <p className="text-sm sm:text-base text-gray-300 leading-relaxed text-justify">
+                  Because that's the truth. A piano doesn't make someone a composer. A studio doesn't make someone a producer. A tool does not erase authorship.
+                </p>
+              </div>
 
-                {/* On Innovation and Authorship */}
-                <div className="bg-gradient-to-r from-[#B8860B]/10 to-transparent p-4 sm:p-6 rounded-xl">
-                  <h4 className="text-base sm:text-lg font-semibold text-white mb-3">
-                    On Innovation and Authorship
-                  </h4>
-                  <div className="space-y-2 sm:space-y-3 text-xs sm:text-sm text-gray-400">
-                    <p>
-                      Poetic Metal was created using modern creative tools, including Suno. The words, themes, and direction are mine.
-                    </p>
-                    <p className="font-semibold text-[#B8860B] text-base sm:text-lg not-italic pt-2">
-                      The music stands on its own.
-                    </p>
-                  </div>
-                </div>
+              <div>
+                <h4 className="text-sm sm:text-base font-bold text-[#B8860B] mb-3 sm:mb-4 tracking-wider">
+                  ON INNOVATION AND AUTHORSHIP
+                </h4>
+                <p className="text-sm sm:text-base text-gray-300 leading-relaxed text-justify">
+                  Poetic Metal was created using modern creative tools, including Suno. The words, themes, and direction are mine. <span className="text-[#B8860B] font-semibold">The music stands on its own.</span>
+                </p>
               </div>
             </div>
           </div>
@@ -312,27 +340,11 @@ export default function Page() {
           {/* Judy Briggs Tracks Grid - Responsive columns */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 max-w-5xl mx-auto px-4 sm:px-0">
             {tracks.map((track, index) => (
-              <AudioCard 
-                key={index} 
-                track={track} 
-                index={index}
-                isPlaying={currentlyPlayingIndex === index}
-                onPlayPause={(playing) => {
-                  setCurrentlyPlayingIndex(playing ? index : null);
-                }}
-              />
+              <AudioCard key={index} track={track} index={index} />
             ))}
           </div>
 
-          {/* Additional info */}
-          <div className="mt-8 sm:mt-10 lg:mt-12 text-center px-4">
-            <div className="inline-flex flex-col sm:flex-row items-center gap-2 sm:gap-3 p-3 sm:p-4 bg-[#111111] rounded-xl border border-[#B8860B]/30">
-              <span className="text-[#B8860B] text-xl">🎵</span>
-              <p className="text-xs sm:text-sm text-gray-300 text-center sm:text-left">
-                <span className="font-semibold text-[#B8860B]">Coming Soon:</span> Full album "Poetic Metal" available March 10, 2026
-              </p>
-            </div>
-          </div>
+
         </div>
       </section>
 
@@ -342,12 +354,36 @@ export default function Page() {
           {/* Email Contacts Section */}
           <div className="border-t border-[#B8860B]/20 pt-6 sm:pt-8">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-              <p className="text-xs sm:text-sm text-gray-400">@rebelechrecords.com</p>
-              <p className="text-xs sm:text-sm text-gray-400">General / Artist Contact: <span className="text-[#B8860B]">jsoul@…</span></p>
-              <p className="text-xs sm:text-sm text-gray-400">Artist Contact – Judy Briggs: <span className="text-[#800080]">judy@…</span></p>
-              <p className="text-xs sm:text-sm text-gray-400">Business & Strategy: <span className="text-[#B8860B]">vox@…</span></p>
-              <p className="text-xs sm:text-sm text-gray-400">Sales & Engagement: <span className="text-[#800080]">sales@…</span></p>
-              <p className="text-xs sm:text-sm text-gray-400">Digital & Social Media: <span className="text-[#B8860B]">emily@…</span></p>
+              <p className="text-xs sm:text-sm text-gray-400">
+                General / Artist Contact:{" "}
+                <a href="jsoul@rebelechrecords.com"target="blank" className="text-[#B8860B] hover:underline transition-colors">
+                  jsoul@rebelechrecords.com
+                </a>
+              </p>
+              <p className="text-xs sm:text-sm text-gray-400">
+                Artist Contact – Judy Briggs:{" "}
+                <a href="judy@rebelechrecords.com" target="blank"className="text-[#800080] hover:underline transition-colors">
+                  judy@rebelechrecords.com
+                </a>
+              </p>
+              <p className="text-xs sm:text-sm text-gray-400">
+                Business & Strategy:{" "}
+                <a href="vox@rebelechrecords.com"target="blank" className="text-[#B8860B] hover:underline transition-colors">
+                  vox@rebelechrecords.com
+                </a>
+              </p>
+              <p className="text-xs sm:text-sm text-gray-400">
+                Sales & Engagement:{" "}
+                <a href="sales@rebelechrecords.com" target="blank"className="text-[#800080] hover:underline transition-colors">
+                  sales@rebelechrecords.com
+                </a>
+              </p>
+              <p className="text-xs sm:text-sm text-gray-400">
+                Digital & Social Media:{" "}
+                <a href="emily@rebelechrecords.com" target="blank" className="text-[#B8860B] hover:underline transition-colors">
+                  emily@rebelechrecords.com
+                </a>
+              </p>
             </div>
           </div>
         </div>
@@ -360,20 +396,11 @@ export default function Page() {
    🎵 PROFESSIONAL AUDIO CARD COMPONENT - FULLY RESPONSIVE
 ========================================================= */
 
-function AudioCard({ 
-  track, 
-  index, 
-  isPlaying, 
-  onPlayPause 
-}: { 
-  track: Track; 
-  index: number; 
-  isPlaying: boolean;
-  onPlayPause: (playing: boolean) => void;
-}) {
+function AudioCard({ track, index }: { track: Track; index: number }) {
   const audioRef = useRef<HTMLAudioElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
 
+  const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [duration, setDuration] = useState(0);
   const [current, setCurrent] = useState(0);
@@ -394,10 +421,7 @@ function AudioCard({
 
     const updateTime = () => setCurrent(audio.currentTime);
     const loaded = () => setDuration(audio.duration);
-    const ended = () => {
-      onPlayPause(false);
-      setCurrent(0);
-    };
+    const ended = () => setIsPlaying(false);
 
     audio.addEventListener("timeupdate", updateTime);
     audio.addEventListener("loadedmetadata", loaded);
@@ -408,40 +432,33 @@ function AudioCard({
       audio.removeEventListener("loadedmetadata", loaded);
       audio.removeEventListener("ended", ended);
     };
-  }, [onPlayPause]);
+  }, []);
 
-  // Handle play/pause based on isPlaying prop
-  useEffect(() => {
+  const togglePlay = () => {
     const audio = audioRef.current;
     if (!audio) return;
 
     if (isPlaying) {
-      audio.play().catch(error => {
-        console.log("Playback failed:", error);
-        onPlayPause(false);
-      });
-    } else {
       audio.pause();
+    } else {
+      audio.play();
     }
-  }, [isPlaying, onPlayPause]);
-
-  const togglePlay = () => {
-    onPlayPause(!isPlaying);
+    setIsPlaying(!isPlaying);
   };
 
   const stopAudio = () => {
     const audio = audioRef.current;
     if (!audio) return;
-    
+
     audio.pause();
     audio.currentTime = 0;
-    onPlayPause(false);
+    setIsPlaying(false);
   };
 
   const toggleMute = () => {
     const audio = audioRef.current;
     if (!audio) return;
-    
+
     audio.muted = !isMuted;
     setIsMuted(!isMuted);
   };
@@ -449,7 +466,7 @@ function AudioCard({
   const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const audio = audioRef.current;
     if (!audio) return;
-    
+
     const newVolume = parseFloat(e.target.value);
     audio.volume = newVolume;
     setVolume(newVolume);
@@ -460,7 +477,7 @@ function AudioCard({
     const progress = progressRef.current;
     const audio = audioRef.current;
     if (!progress || !audio || !duration) return;
-    
+
     const rect = progress.getBoundingClientRect();
     const percent = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
     audio.currentTime = percent * duration;
@@ -472,7 +489,7 @@ function AudioCard({
     <div className="group relative">
       {/* Background gradient effect */}
       <div className="absolute -inset-0.5 bg-gradient-to-r from-[#B8860B] to-[#800080] rounded-2xl blur opacity-20 group-hover:opacity-30 transition duration-300"></div>
-      
+
       {/* Main card */}
       <div className="relative bg-[#111111] rounded-2xl border border-[#B8860B]/20 overflow-hidden hover:border-[#B8860B]/40 transition-all duration-300">
         <audio ref={audioRef} src={track.src} preload="metadata" />
@@ -524,7 +541,7 @@ function AudioCard({
                   className="absolute left-0 top-0 h-full bg-gradient-to-r from-[#B8860B] to-[#800080] rounded-full transition-all duration-100"
                   style={{ width: `${progressPercent}%` }}
                 />
-                <div 
+                <div
                   className="absolute top-1/2 -translate-y-1/2 w-2 h-2 sm:w-3 sm:h-3 bg-[#B8860B] rounded-full opacity-0 group-hover/progress:opacity-100 transition-opacity shadow-lg"
                   style={{ left: `calc(${progressPercent}% - 4px)` }}
                 />
@@ -561,10 +578,10 @@ function AudioCard({
                   >
                     {isMuted ? "🔇" : volume > 0.7 ? "🔊" : volume > 0.3 ? "🔉" : "🔈"}
                   </button>
-                  
+
                   {/* Volume Slider Popup - Responsive positioning */}
                   {showVolumeControl && (
-                    <div 
+                    <div
                       className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 p-1.5 sm:p-2 bg-[#222222] rounded-lg border border-[#B8860B]/30 shadow-xl z-50"
                       onMouseEnter={() => setShowVolumeControl(true)}
                       onMouseLeave={() => setShowVolumeControl(false)}
