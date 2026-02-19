@@ -9,6 +9,98 @@ interface Track {
   thumbnail: string;
 }
 
+// Countdown Component - SMALLER VERSION
+function CountdownTimer() {
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0
+  });
+
+  useEffect(() => {
+    const targetDate = new Date('2026-03-10T00:01:00').getTime();
+
+    const updateCountdown = () => {
+      const now = new Date().getTime();
+      const difference = targetDate - now;
+
+      if (difference > 0) {
+        setTimeLeft({
+          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+          minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
+          seconds: Math.floor((difference % (1000 * 60)) / 1000)
+        });
+      } else {
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+      }
+    };
+
+    updateCountdown();
+    const timer = setInterval(updateCountdown, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const timeUnits = [
+    { value: timeLeft.days, label: 'Days' },
+    { value: timeLeft.hours, label: 'Hrs' },
+    { value: timeLeft.minutes, label: 'Min' },
+    { value: timeLeft.seconds, label: 'Sec' }
+  ];
+
+  return (
+    <div className="w-full max-w-2xl mx-auto mt-6 mb-2">
+      {/* Countdown Header - Smaller */}
+      <div className="text-center mb-2">
+        <span className="text-[10px] sm:text-xs font-bold text-[#B8860B] uppercase tracking-[0.2em]">
+          Album Releases In
+        </span>
+      </div>
+
+      {/* Countdown Timer - Smaller Cards */}
+      <div className="grid grid-cols-4 gap-2 sm:gap-3">
+        {timeUnits.map((unit, index) => (
+          <div
+            key={index}
+            className="relative group"
+          >
+            {/* Background glow effect - Subtle */}
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-[#B8860B] to-[#800080] rounded-lg blur opacity-20 group-hover:opacity-30 transition duration-300"></div>
+
+            {/* Time card - Smaller padding and text */}
+            <div className="relative bg-[#111111] border border-[#B8860B]/20 rounded-lg p-2 text-center hover:border-[#B8860B]/40 transition-all duration-300">
+              <div className="text-base sm:text-lg md:text-xl font-bold text-white mb-0 font-mono">
+                {unit.value.toString().padStart(2, '0')}
+              </div>
+              <div className="text-[8px] sm:text-[10px] text-gray-400 uppercase tracking-wider">
+                {unit.label}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Progress bar - Smaller */}
+      <div className="mt-3 w-full h-0.5 bg-[#111111] rounded-full overflow-hidden">
+        <div
+          className="h-full bg-gradient-to-r from-[#B8860B] to-[#800080] rounded-full transition-all duration-1000"
+          style={{
+            width: `${100 - (timeLeft.days / 365) * 100}%`,
+            opacity: 0.7
+          }}
+        ></div>
+      </div>
+
+      {/* Release date - Smaller */}
+      <p className="text-[8px] sm:text-[10px] text-gray-500 text-center mt-2">
+        March 10, 2026 • 12:01 AM
+      </p>
+    </div>
+  );
+}
+
 export default function Page() {
   // 🔥 ONLY EDIT HERE — PUT YOUR SPOTIFY URLs
   const tracks: Track[] = [
@@ -26,159 +118,152 @@ export default function Page() {
     },
   ];
 
+
   return (
     <div className="min-h-screen bg-[#0A0A0A] overflow-x-hidden">
       {/* Header - Fixed positioning to ensure it's always visible */}
-     <>
-  <header id="header" className="fixed top-0 left-0 right-0 z-50 w-full border-b border-[#B8860B]/20 bg-[#0A0A0A]/95 backdrop-blur supports-[backdrop-filter]:bg-[#0A0A0A]/60">
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div className="flex h-20 sm:h-24 items-center justify-between gap-4">
-        
-        {/* Brand Section */}
-        <div className="flex items-center gap-3 sm:gap-4 md:gap-6 min-w-0 flex-shrink">
-          <img
-            src="/images/Picture1.jpg"
-            alt="Rebel Echo Records Logo"
-            className="h-12 w-12 sm:h-14 md:h-16 sm:w-14 md:w-16 rounded-full object-cover ring-2 ring-[#B8860B]/50 shadow-lg shadow-[#B8860B]/20 flex-shrink-0"
-          />
-          <div className="flex flex-col min-w-0">
-            <h1 className="text-lg sm:text-2xl lg:text-3xl font-bold text-white tracking-tight truncate leading-tight">
-              Rebel Echo Records
-            </h1>
-            {/* Main Tagline - Adjusted visibility to show on most mobile screens */}
-            <p className="text-[10px] sm:text-xs md:text-sm text-[#B8860B] uppercase tracking-widest block truncate">
-              Home of Gospel-Core & Poetic Metal
-            </p>
+      <>
+        <header id="header" className="fixed top-0 left-0 right-0 z-50 w-full border-b border-[#B8860B]/20 bg-[#0A0A0A]/95 backdrop-blur supports-[backdrop-filter]:bg-[#0A0A0A]/60">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="flex h-20 sm:h-24 items-center justify-between gap-4">
+
+              {/* Brand Section */}
+              <div className="flex items-center gap-3 sm:gap-4 md:gap-6 min-w-0 flex-shrink">
+                <img
+                  src="/images/Picture1.jpg"
+                  alt="Rebel Echo Records Logo"
+                  className="h-12 w-12 sm:h-14 md:h-16 sm:w-14 md:w-16 rounded-full object-cover ring-2 ring-[#B8860B]/50 shadow-lg shadow-[#B8860B]/20 flex-shrink-0"
+                />
+                <div className="flex flex-col min-w-0">
+                  <h1 className="text-lg sm:text-2xl lg:text-3xl font-bold text-white tracking-tight truncate leading-tight">
+                    Rebel Echo Records
+                  </h1>
+                  {/* Main Tagline - Adjusted visibility to show on most mobile screens */}
+                  <p className="text-[10px] sm:text-xs md:text-sm text-[#B8860B] uppercase tracking-widest block truncate">
+                    Home of Gospel-Core & Poetic Metal
+                  </p>
+                </div>
+              </div>
+
+              {/* Desktop Navigation - Switches to Menu at 1024px to prevent overlap */}
+              <nav className="hidden lg:flex items-center gap-4 xl:gap-8 flex-shrink-0">
+                <a href="#" className="text-sm font-medium text-gray-300 transition-colors hover:text-[#B8860B]">Home</a>
+                <span className="text-sm font-medium text-gray-300 transition-colors hover:text-[#B8860B] cursor-default whitespace-nowrap">Privacy Policy</span>
+                <span className="text-sm font-medium text-gray-300 transition-colors hover:text-[#B8860B] cursor-default whitespace-nowrap">Terms of Service</span>
+                <span className="text-sm font-medium text-gray-300 transition-colors hover:text-[#B8860B] cursor-default whitespace-nowrap">Shop</span>
+                <span className="text-sm font-medium text-gray-300 transition-colors hover:text-[#B8860B] cursor-default whitespace-nowrap">Press kit</span>
+                <span className="text-sm font-medium text-gray-300 transition-colors hover:text-[#B8860B] cursor-default whitespace-nowrap">About</span>
+              </nav>
+
+              {/* Mobile/Tablet Menu Button */}
+              <div className="lg:hidden flex items-center">
+                <button
+                  type="button"
+                  className="inline-flex items-center justify-center p-2 rounded-md text-gray-300 hover:text-[#B8860B] hover:bg-[#B8860B]/10 focus:outline-none focus:ring-2 focus:ring-[#B8860B] transition-colors"
+                  onClick={() => {
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (mobileMenu) mobileMenu.classList.toggle('hidden');
+                  }}
+                >
+                  <span className="sr-only">Open main menu</span>
+                  <svg className="h-7 w-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <circle cx="12" cy="5" r="2" fill="currentColor" />
+                    <circle cx="12" cy="12" r="2" fill="currentColor" />
+                    <circle cx="12" cy="19" r="2" fill="currentColor" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            {/* Mobile Menu Dropdown */}
+            <div id="mobile-menu" className="hidden lg:hidden py-4 border-t border-[#B8860B]/20">
+              <nav className="flex flex-col space-y-1">
+                <a href="#" className="text-base font-medium text-gray-300 hover:text-[#B8860B] px-4 py-3 rounded-md hover:bg-[#B8860B]/10 transition-colors">Home</a>
+                <span className="text-base font-medium text-gray-300 hover:text-[#B8860B] px-4 py-3 rounded-md hover:bg-[#B8860B]/10 transition-colors cursor-default">Privacy Policy</span>
+                <span className="text-base font-medium text-gray-300 hover:text-[#B8860B] px-4 py-3 rounded-md hover:bg-[#B8860B]/10 transition-colors cursor-default">Terms of Service</span>
+                <span className="text-base font-medium text-gray-300 hover:text-[#B8860B] px-4 py-3 rounded-md hover:bg-[#B8860B]/10 transition-colors cursor-default">Shop</span>
+                <span className="text-base font-medium text-gray-300 hover:text-[#B8860B] px-4 py-3 rounded-md hover:bg-[#B8860B]/10 transition-colors cursor-default">Press kit</span>
+                <span className="text-base font-medium text-gray-300 hover:text-[#B8860B] px-4 py-3 rounded-md hover:bg-[#B8860B]/10 transition-colors cursor-default">About</span>
+              </nav>
+            </div>
           </div>
+        </header>
+
+        {/* Social Media Bar - Now positioned below fixed header */}
+        <div className="w-full bg-[#0A0A0A] border-y border-[#B8860B]/20 mt-[80px] sm:mt-[96px]">
+  <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div className="flex items-center justify-center h-16">
+      {/* Social Icons - Centered */}
+      <div id="social-icons" className="flex items-center gap-6 md:gap-8">
+        {/* Spotify - Active */}
+        <a
+          href="https://open.spotify.com/artist/3IeyA0cRJhNgtF9Jp1HBFN?si=ngY7QIYcT9Oi5CLngTicvw"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group relative flex items-center justify-center"
+        >
+          <svg
+            className="w-6 h-6 text-[#1DB954] hover:scale-110 transition-transform duration-200"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141 4.14-1.26 9.479-.6 13.14 1.56.42.24.6.84.341 1.26zm.12-3.36c-3.84-2.28-10.14-2.52-13.74-1.38-.6.18-1.26-.18-1.44-.78-.18-.6.18-1.26.78-1.44 4.14-1.26 11.04-1.02 15.36 1.62.54.3.72 1.02.42 1.56-.3.48-1.02.66-1.56.36z" />
+          </svg>
+        </a>
+
+        {/* YouTube - Active */}
+        <a
+          href="https://music.youtube.com/channel/UCzcwoWP24YPa2mjmaAlDwvg?si=qLe1r-ZdZTTJNLOt"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group relative flex items-center justify-center"
+        >
+          <svg
+            className="w-6 h-6 text-[#FF0000] hover:scale-110 transition-transform duration-200"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+          </svg>
+        </a>
+
+        {/* Instagram - Inactive */}
+        <div className="group relative flex items-center justify-center cursor-not-allowed">
+          <svg
+            className="w-6 h-6 text-gray-500 opacity-50"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1 1 12.324 0 6.162 6.162 0 0 1-12.324 0zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm4.965-10.405a1.44 1.44 0 1 1 2.881.001 1.44 1.44 0 0 1-2.881-.001z" />
+          </svg>
         </div>
 
-        {/* Desktop Navigation - Switches to Menu at 1024px to prevent overlap */}
-        <nav className="hidden lg:flex items-center gap-4 xl:gap-8 flex-shrink-0">
-          <a href="#" className="text-sm font-medium text-gray-300 transition-colors hover:text-[#B8860B]">Home</a>
-          <span className="text-sm font-medium text-gray-300 transition-colors hover:text-[#B8860B] cursor-default whitespace-nowrap">Privacy Policy</span>
-          <span className="text-sm font-medium text-gray-300 transition-colors hover:text-[#B8860B] cursor-default whitespace-nowrap">Terms of Service</span>
-          <span className="text-sm font-medium text-gray-300 transition-colors hover:text-[#B8860B] cursor-default whitespace-nowrap">Shop</span>
-          <span className="text-sm font-medium text-gray-300 transition-colors hover:text-[#B8860B] cursor-default whitespace-nowrap">Press kit</span>
-          <span className="text-sm font-medium text-gray-300 transition-colors hover:text-[#B8860B] cursor-default whitespace-nowrap">About</span>
-        </nav>
-
-        {/* Mobile/Tablet Menu Button */}
-        <div className="lg:hidden flex items-center">
-          <button
-            type="button"
-            className="inline-flex items-center justify-center p-2 rounded-md text-gray-300 hover:text-[#B8860B] hover:bg-[#B8860B]/10 focus:outline-none focus:ring-2 focus:ring-[#B8860B] transition-colors"
-            onClick={() => {
-              const mobileMenu = document.getElementById('mobile-menu');
-              if (mobileMenu) mobileMenu.classList.toggle('hidden');
-            }}
+        {/* Facebook - Inactive */}
+        <div className="group relative flex items-center justify-center cursor-not-allowed">
+          <svg
+            className="w-6 h-6 text-gray-500 opacity-50"
+            fill="currentColor"
+            viewBox="0 0 24 24"
           >
-            <span className="sr-only">Open main menu</span>
-            <svg className="h-7 w-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <circle cx="12" cy="5" r="2" fill="currentColor" />
-              <circle cx="12" cy="12" r="2" fill="currentColor" />
-              <circle cx="12" cy="19" r="2" fill="currentColor" />
-            </svg>
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Menu Dropdown */}
-      <div id="mobile-menu" className="hidden lg:hidden py-4 border-t border-[#B8860B]/20">
-        <nav className="flex flex-col space-y-1">
-          <a href="#" className="text-base font-medium text-gray-300 hover:text-[#B8860B] px-4 py-3 rounded-md hover:bg-[#B8860B]/10 transition-colors">Home</a>
-          <span className="text-base font-medium text-gray-300 hover:text-[#B8860B] px-4 py-3 rounded-md hover:bg-[#B8860B]/10 transition-colors cursor-default">Privacy Policy</span>
-          <span className="text-base font-medium text-gray-300 hover:text-[#B8860B] px-4 py-3 rounded-md hover:bg-[#B8860B]/10 transition-colors cursor-default">Terms of Service</span>
-          <span className="text-base font-medium text-gray-300 hover:text-[#B8860B] px-4 py-3 rounded-md hover:bg-[#B8860B]/10 transition-colors cursor-default">Shop</span>
-          <span className="text-base font-medium text-gray-300 hover:text-[#B8860B] px-4 py-3 rounded-md hover:bg-[#B8860B]/10 transition-colors cursor-default">Press kit</span>
-          <span className="text-base font-medium text-gray-300 hover:text-[#B8860B] px-4 py-3 rounded-md hover:bg-[#B8860B]/10 transition-colors cursor-default">About</span>
-        </nav>
-      </div>
-    </div>
-  </header>
-
-  {/* Social Media Bar - Now positioned below fixed header */}
-  <div className="w-full bg-[#0A0A0A] border-y border-[#B8860B]/20 mt-[80px] sm:mt-[96px]">
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div className="flex items-center justify-center sm:justify-between h-16">
-        {/* Left side text - hidden on mobile */}
-        <span className="hidden sm:block text-sm text-gray-400 uppercase tracking-wider">
-          {/* You can add text here if needed */}
-        </span>
-
-        {/* Social Icons */}
-        <div id="social-icons" className="flex items-center gap-6 md:gap-8">
-          {/* Spotify - Active */}
-          <a
-            href="https://open.spotify.com/artist/3IeyA0cRJhNgtF9Jp1HBFN?si=ngY7QIYcT9Oi5CLngTicvw"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group relative flex items-center justify-center"
-          >
-            <svg
-              className="w-6 h-6 text-[#1DB954] hover:scale-110 transition-transform duration-200"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141 4.14-1.26 9.479-.6 13.14 1.56.42.24.6.84.341 1.26zm.12-3.36c-3.84-2.28-10.14-2.52-13.74-1.38-.6.18-1.26-.18-1.44-.78-.18-.6.18-1.26.78-1.44 4.14-1.26 11.04-1.02 15.36 1.62.54.3.72 1.02.42 1.56-.3.48-1.02.66-1.56.36z" />
-            </svg>
-          </a>
-
-          {/* YouTube - Active */}
-          <a
-            href="https://music.youtube.com/channel/UCzcwoWP24YPa2mjmaAlDwvg?si=qLe1r-ZdZTTJNLOt"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group relative flex items-center justify-center"
-          >
-            <svg
-              className="w-6 h-6 text-[#FF0000] hover:scale-110 transition-transform duration-200"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
-            </svg>
-          </a>
-
-          {/* Instagram - Inactive */}
-          <div className="group relative flex items-center justify-center cursor-not-allowed">
-            <svg
-              className="w-6 h-6 text-gray-500 opacity-50"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1 1 12.324 0 6.162 6.162 0 0 1-12.324 0zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm4.965-10.405a1.44 1.44 0 1 1 2.881.001 1.44 1.44 0 0 1-2.881-.001z" />
-            </svg>
-          </div>
-
-          {/* Facebook - Inactive */}
-          <div className="group relative flex items-center justify-center cursor-not-allowed">
-            <svg
-              className="w-6 h-6 text-gray-500 opacity-50"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path d="M22.676 0H1.324C.593 0 0 .593 0 1.324v21.352C0 23.408.593 24 1.324 24h11.494v-9.294H9.689v-3.621h3.129V8.41c0-3.099 1.894-4.785 4.659-4.785 1.325 0 2.464.097 2.796.141v3.24h-1.921c-1.5 0-1.792.721-1.792 1.771v2.311h3.584l-.465 3.63H16.56V24h6.115c.733 0 1.325-.592 1.325-1.324V1.324C24 .593 23.408 0 22.676 0z" />
-            </svg>
-          </div>
-
-          {/* Apple Music - Inactive */}
-          <div className="group relative flex items-center justify-center cursor-not-allowed">
-            <svg
-              className="w-6 h-6 text-gray-500 opacity-50"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm4.89 18.08c-.18.24-.48.36-.78.24-1.44-.6-3.24-.9-5.1-.9-1.86 0-3.66.3-5.1.9-.3.12-.6 0-.78-.24-.18-.24-.18-.6.06-.84 1.2-1.2 3.06-1.86 5.1-1.86 2.04 0 3.9.66 5.1 1.86.18.24.18.6-.06.84zm1.26-3.18c-.18.24-.48.36-.78.24-1.68-.72-3.84-1.08-6-1.08-2.16 0-4.32.36-6 1.08-.3.12-.6 0-.78-.24-.18-.24-.18-.6.06-.84 1.44-1.02 3.84-1.56 6.72-1.56 2.88 0 5.28.54 6.72 1.56.24.24.24.6.06.84zm1.26-3.18c-.18.24-.48.36-.78.24-2.04-.9-4.68-1.38-7.62-1.38-2.94 0-5.58.48-7.62 1.38-.3.12-.6 0-.78-.24-.18-.24-.18-.6.06-.84 1.74-1.2 5.04-1.86 8.34-1.86 3.3 0 6.6.66 8.34 1.86.24.24.24.6.06.84z" />
-            </svg>
-          </div>
+            <path d="M22.676 0H1.324C.593 0 0 .593 0 1.324v21.352C0 23.408.593 24 1.324 24h11.494v-9.294H9.689v-3.621h3.129V8.41c0-3.099 1.894-4.785 4.659-4.785 1.325 0 2.464.097 2.796.141v3.24h-1.921c-1.5 0-1.792.721-1.792 1.771v2.311h3.584l-.465 3.63H16.56V24h6.115c.733 0 1.325-.592 1.325-1.324V1.324C24 .593 23.408 0 22.676 0z" />
+          </svg>
         </div>
 
-        {/* Right side spacer - hidden on mobile */}
-        <div className="hidden sm:block w-24"></div>
+        {/* Apple Music - Inactive */}
+        <div className="group relative flex items-center justify-center cursor-not-allowed">
+          <svg
+            className="w-6 h-6 text-gray-500 opacity-50"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path d="M16.365 1.43c0 1.14-.42 2.19-1.26 3.15-.87.99-1.92 1.56-3.06 1.47-.12-1.08.39-2.19 1.2-3.12.84-.96 2.04-1.62 3.12-1.5zM20.82 17.1c-.6 1.35-.9 1.95-1.68 3.15-1.08 1.71-2.58 3.84-4.44 3.87-1.65.03-2.07-1.08-4.29-1.08-2.25 0-2.7 1.05-4.35 1.11-1.86.06-3.27-1.92-4.35-3.63C-1.41 14.4.06 6.9 4.14 6.69c1.8-.09 3.51 1.2 4.62 1.2 1.11 0 3.18-1.47 5.37-1.26.9.03 3.42.36 5.04 2.73-4.44 2.43-3.72 8.7 1.65 10.74z" />
+          </svg>
+        </div>
       </div>
     </div>
   </div>
-</>
+</div>
+      </>
 
       {/* Hero Section */}
       <section id="hero" className="relative w-full overflow-hidden pt-6 pb-10 sm:pt-10 sm:pb-16 lg:pt-12 lg:pb-20" style={{ backgroundColor: '#0A0A0A' }}>
@@ -202,6 +287,9 @@ export default function Page() {
 
               RER exists at the intersection of faith, fire, vulnerability, and strength. We build music that confronts, restores, and refuses to compromise.
             </p>
+
+            {/* COUNTDOWN TIMER - SMALLER VERSION INSERTED HERE */}
+
 
             <br />
             {/* J'Soul section - Larger and more prominent */}
@@ -260,7 +348,7 @@ export default function Page() {
                       <p className="text-sm sm:text-base leading-relaxed text-justify">
                         Blending Christian metal, poetic lyricism, rap influence, and emotionally grounded storytelling, Poetic Metal explores endurance in relationships, spiritual guidance through adversity, mental health recovery, and unwavering family bonds.
                       </p>
-
+                      <CountdownTimer />
                       {/* Spotify Link with Logo */}
                       <div className="flex items-center justify-center gap-3 mt-6 pt-4 border-t border-[#B8860B]/20">
                         {/* PASTE YOUR SPOTIFY LOGO URL BELOW */}
@@ -397,94 +485,167 @@ export default function Page() {
 
           {/* Email Contacts Section */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-  <p className="text-xs sm:text-sm text-gray-400">
-    <span className="font-bold text-white">Founder & Creative Director:</span>{" "}
-    <a 
-      href="https://mail.google.com/mail/?view=cm&fs=1&to=james@rebelechorecords.com" 
-      target="_blank" 
-      rel="noopener noreferrer"
-      className="hover:text-white transition-colors duration-200"
-    >
-      james@rebelechorecords.com
-    </a>
-  </p>
-  <p className="text-xs sm:text-sm text-gray-400">
-    <span className="font-bold text-white">General / Artist Contact:</span>{" "}
-    <a 
-      href="https://mail.google.com/mail/?view=cm&fs=1&to=jsoul@rebelechorecords.com" 
-      target="_blank" 
-      rel="noopener noreferrer"
-      className="hover:text-white transition-colors duration-200"
-    >
-      jsoul@rebelechorecords.com
-    </a>
-  </p>
-  <p className="text-xs sm:text-sm text-gray-400">
-    <span className="font-bold text-white">Artist Contact – Judy Briggs:</span>{" "}
-    <a 
-      href="https://mail.google.com/mail/?view=cm&fs=1&to=judy@rebelechorecords.com" 
-      target="_blank" 
-      rel="noopener noreferrer"
-      className="hover:text-white transition-colors duration-200"
-    >
-      judy@rebelechorecords.com
-    </a>
-  </p>
-  <p className="text-xs sm:text-sm text-gray-400">
-    <span className="font-bold text-white">Business & Strategy:</span>{" "}
-    <a 
-      href="https://mail.google.com/mail/?view=cm&fs=1&to=vox@rebelechorecords.com" 
-      target="_blank" 
-      rel="noopener noreferrer"
-      className="hover:text-white transition-colors duration-200"
-    >
-      vox@rebelechorecords.com
-    </a>
-  </p>
-  <p className="text-xs sm:text-sm text-gray-400">
-    <span className="font-bold text-white">Sales & Engagement:</span>{" "}
-    <a 
-      href="https://mail.google.com/mail/?view=cm&fs=1&to=sales@rebelechorecords.com" 
-      target="_blank" 
-      rel="noopener noreferrer"
-      className="hover:text-white transition-colors duration-200"
-    >
-      sales@rebelechorecords.com
-    </a>
-  </p>
-  <p className="text-xs sm:text-sm text-gray-400">
-    <span className="font-bold text-white">Digital & Social Media:</span>{" "}
-    <a 
-      href="https://mail.google.com/mail/?view=cm&fs=1&to=emily@rebelechorecords.com" 
-      target="_blank" 
-      rel="noopener noreferrer"
-      className="hover:text-white transition-colors duration-200"
-    >
-      emily@rebelechorecords.com
-    </a>
-  </p>
-</div>
+            <p className="text-xs sm:text-sm text-gray-400">
+              <span className="font-bold text-white">Founder & Creative Director:</span>{" "}
+              <a
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=james@rebelechorecords.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors duration-200"
+              >
+                james@rebelechorecords.com
+              </a>
+            </p>
+            <p className="text-xs sm:text-sm text-gray-400">
+              <span className="font-bold text-white">General / Artist Contact:</span>{" "}
+              <a
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=jsoul@rebelechorecords.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors duration-200"
+              >
+                jsoul@rebelechorecords.com
+              </a>
+            </p>
+            <p className="text-xs sm:text-sm text-gray-400">
+              <span className="font-bold text-white">Artist Contact – Judy Briggs:</span>{" "}
+              <a
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=judy@rebelechorecords.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors duration-200"
+              >
+                judy@rebelechorecords.com
+              </a>
+            </p>
+            <p className="text-xs sm:text-sm text-gray-400">
+              <span className="font-bold text-white">Business & Strategy:</span>{" "}
+              <a
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=vox@rebelechorecords.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors duration-200"
+              >
+                vox@rebelechorecords.com
+              </a>
+            </p>
+            <p className="text-xs sm:text-sm text-gray-400">
+              <span className="font-bold text-white">Sales & Engagement:</span>{" "}
+              <a
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=sales@rebelechorecords.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors duration-200"
+              >
+                sales@rebelechorecords.com
+              </a>
+            </p>
+            <p className="text-xs sm:text-sm text-gray-400">
+              <span className="font-bold text-white">Digital & Social Media:</span>{" "}
+              <a
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=emily@rebelechorecords.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors duration-200"
+              >
+                emily@rebelechorecords.com
+              </a>
+            </p>
+          </div>
         </div>
+        <div className="w-full bg-[#0A0A0A] border-y border-[#B8860B]/20 mt-[80px] sm:mt-[6px]">
+  <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div className="flex items-center justify-center h-16">
+      {/* Social Icons - Centered */}
+      <div id="social-icons" className="flex items-center gap-6 md:gap-8">
+        {/* Spotify - Active */}
+        <a
+          href="https://open.spotify.com/artist/3IeyA0cRJhNgtF9Jp1HBFN?si=ngY7QIYcT9Oi5CLngTicvw"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group relative flex items-center justify-center"
+        >
+          <svg
+            className="w-6 h-6 text-[#1DB954] hover:scale-110 transition-transform duration-200"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141 4.14-1.26 9.479-.6 13.14 1.56.42.24.6.84.341 1.26zm.12-3.36c-3.84-2.28-10.14-2.52-13.74-1.38-.6.18-1.26-.18-1.44-.78-.18-.6.18-1.26.78-1.44 4.14-1.26 11.04-1.02 15.36 1.62.54.3.72 1.02.42 1.56-.3.48-1.02.66-1.56.36z" />
+          </svg>
+        </a>
+
+        {/* YouTube - Active */}
+        <a
+          href="https://music.youtube.com/channel/UCzcwoWP24YPa2mjmaAlDwvg?si=qLe1r-ZdZTTJNLOt"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group relative flex items-center justify-center"
+        >
+          <svg
+            className="w-6 h-6 text-[#FF0000] hover:scale-110 transition-transform duration-200"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+          </svg>
+        </a>
+
+        {/* Instagram - Inactive */}
+        <div className="group relative flex items-center justify-center cursor-not-allowed">
+          <svg
+            className="w-6 h-6 text-gray-500 opacity-50"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1 1 12.324 0 6.162 6.162 0 0 1-12.324 0zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm4.965-10.405a1.44 1.44 0 1 1 2.881.001 1.44 1.44 0 0 1-2.881-.001z" />
+          </svg>
+        </div>
+
+        {/* Facebook - Inactive */}
+        <div className="group relative flex items-center justify-center cursor-not-allowed">
+          <svg
+            className="w-6 h-6 text-gray-500 opacity-50"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path d="M22.676 0H1.324C.593 0 0 .593 0 1.324v21.352C0 23.408.593 24 1.324 24h11.494v-9.294H9.689v-3.621h3.129V8.41c0-3.099 1.894-4.785 4.659-4.785 1.325 0 2.464.097 2.796.141v3.24h-1.921c-1.5 0-1.792.721-1.792 1.771v2.311h3.584l-.465 3.63H16.56V24h6.115c.733 0 1.325-.592 1.325-1.324V1.324C24 .593 23.408 0 22.676 0z" />
+          </svg>
+        </div>
+
+        {/* Apple Music - Inactive */}
+        <div className="group relative flex items-center justify-center cursor-not-allowed">
+          <svg
+            className="w-6 h-6 text-gray-500 opacity-50"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path d="M16.365 1.43c0 1.14-.42 2.19-1.26 3.15-.87.99-1.92 1.56-3.06 1.47-.12-1.08.39-2.19 1.2-3.12.84-.96 2.04-1.62 3.12-1.5zM20.82 17.1c-.6 1.35-.9 1.95-1.68 3.15-1.08 1.71-2.58 3.84-4.44 3.87-1.65.03-2.07-1.08-4.29-1.08-2.25 0-2.7 1.05-4.35 1.11-1.86.06-3.27-1.92-4.35-3.63C-1.41 14.4.06 6.9 4.14 6.69c1.8-.09 3.51 1.2 4.62 1.2 1.11 0 3.18-1.47 5.37-1.26.9.03 3.42.36 5.04 2.73-4.44 2.43-3.72 8.7 1.65 10.74z" />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
         {/* Absolute Bottom Copyright */}
         <div className="border-t border-[#B8860B]/20">
-  <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
-    <p className="text-xs sm:text-sm text-gray-400 text-center">
-      ©️ 2026 - Rebel Echo Records
-    </p>
-    <p className="text-xs sm:text-sm text-gray-400 text-center mt-2">
-      Developed by{' '}
-      <a 
-        href="https://www.fiverr.com/sellers/ahmedbinqamar11/edit" 
-        target="_blank" 
-        rel="noopener noreferrer"
-        className="text-[#B8860B] hover:text-[#DAA520] transition-colors duration-200"
-      >
-        Ahmed Bin Qamar
-      </a>
-    </p>
-  </div>
-</div>
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
+            <p className="text-xs sm:text-sm text-gray-400 text-center">
+              ©️ 2026 - Rebel Echo Records
+            </p>
+            <p className="text-xs sm:text-sm text-gray-400 text-center mt-2">
+              Developed by{' '}
+              <a
+                href="https://www.fiverr.com/sellers/ahmedbinqamar11/edit"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#B8860B] hover:text-[#DAA520] transition-colors duration-200"
+              >
+                Ahmed Bin Qamar
+              </a>
+            </p>
+          </div>
+        </div>
       </footer>
     </div>
   );
