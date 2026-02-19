@@ -5,107 +5,74 @@ import { useRef, useState, useEffect } from "react";
 interface Track {
   title: string;
   artist: string;
-  src: string;
+  spotifyUrl: string;
   thumbnail: string;
 }
 
 export default function Page() {
-  // 🔥 ONLY EDIT HERE — PUT YOUR SONG URLs
+  // 🔥 ONLY EDIT HERE — PUT YOUR SPOTIFY URLs
   const tracks: Track[] = [
     {
       title: "Hanging Up The Orange Apron",
       artist: "J'Soul",
-      src: "/Songs/sng1.mp3",
+      spotifyUrl: "https://open.spotify.com/track/72iCJown5g8BuLUqyBteI0",
       thumbnail: "/images/sng1.PNG",
     },
     {
       title: "Butterflies and Second Chances",
       artist: "J'Soul",
-      src: "/Songs/song2.mp3",
+      spotifyUrl: "https://open.spotify.com/track/2ny3LLTssio8NNsTuFmSWQ",
       thumbnail: "/images/Picture7.png",
     },
   ];
 
-  // State to track which audio is currently playing
-  const [currentlyPlaying, setCurrentlyPlaying] = useState<number | null>(null);
-
   return (
     <div className="min-h-screen bg-[#0A0A0A] overflow-x-hidden">
       {/* Header - Fixed positioning to ensure it's always visible */}
-      {/* Header */}
-      {/* Header - Always visible when scrolling */}
-      {/* Header - Always visible when scrolling */}
-      <header id="header" className="fixed top-0 left-0 right-0 z-50 w-full border-b border-[#B8860B]/20 bg-[#0A0A0A]/95 backdrop-blur supports-[backdrop-filter]:bg-[#0A0A0A]/60">
+     <header id="header" className="fixed top-0 left-0 right-0 z-50 w-full border-b border-[#B8860B]/20 bg-[#0A0A0A]/95 backdrop-blur supports-[backdrop-filter]:bg-[#0A0A0A]/60">
   <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-    <div className="flex h-24 items-center justify-between">
-      <div className="flex items-center gap-4 sm:gap-6 min-w-0">
-        {/* Larger Logo image */}
+    <div className="flex h-20 sm:h-24 items-center justify-between gap-4">
+      
+      {/* Brand Section */}
+      <div className="flex items-center gap-3 sm:gap-4 md:gap-6 min-w-0 flex-shrink">
         <img
           src="/images/Picture1.jpg"
           alt="Rebel Echo Records Logo"
-          className="h-14 w-14 sm:h-16 sm:w-16 rounded-full object-cover ring-2 ring-[#B8860B]/50 shadow-lg shadow-[#B8860B]/20 flex-shrink-0"
+          className="h-12 w-12 sm:h-14 md:h-16 sm:w-14 md:w-16 rounded-full object-cover ring-2 ring-[#B8860B]/50 shadow-lg shadow-[#B8860B]/20 flex-shrink-0"
         />
         <div className="flex flex-col min-w-0">
-          <span className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight truncate">
+          <h1 className="text-lg sm:text-2xl lg:text-3xl font-bold text-white tracking-tight truncate leading-tight">
             Rebel Echo Records
-          </span>
-          <span className="text-xs sm:text-sm text-[#B8860B] uppercase tracking-wider hidden sm:block truncate">
+          </h1>
+          {/* Main Tagline - Adjusted visibility to show on most mobile screens */}
+          <p className="text-[10px] sm:text-xs md:text-sm text-[#B8860B] uppercase tracking-widest block truncate">
             Home of Gospel-Core & Poetic Metal
-          </span>
+          </p>
         </div>
       </div>
 
-      {/* Desktop Navigation - Hidden on mobile */}
-      <nav className="hidden md:flex items-center gap-4 md:gap-6 ml-2 sm:ml-0 flex-shrink-0">
-        <a
-          href=""
-          className="text-xs sm:text-sm font-medium text-gray-300 transition-colors whitespace-nowrap hover:text-[#B8860B] px-2 sm:px-0"
-        >
-          Home
-        </a>
-        
-        {/* Additional Menu Items (unlinked) */}
-        <span className="text-xs sm:text-sm font-medium text-gray-300 transition-colors whitespace-nowrap hover:text-[#B8860B] px-2 sm:px-0 cursor-default">
-          Privacy Policy
-        </span>
-        <span className="text-xs sm:text-sm font-medium text-gray-300 transition-colors whitespace-nowrap hover:text-[#B8860B] px-2 sm:px-0 cursor-default">
-          Terms of Service
-        </span>
-        <span className="text-xs sm:text-sm font-medium text-gray-300 transition-colors whitespace-nowrap hover:text-[#B8860B] px-2 sm:px-0 cursor-default">
-          Shop
-        </span>
-        <span className="text-xs sm:text-sm font-medium text-gray-300 transition-colors whitespace-nowrap hover:text-[#B8860B] px-2 sm:px-0 cursor-default">
-          Press kit
-        </span>
-        <span className="text-xs sm:text-sm font-medium text-gray-300 transition-colors whitespace-nowrap hover:text-[#B8860B] px-2 sm:px-0 cursor-default">
-          About
-        </span>
+      {/* Desktop Navigation - Switches to Menu at 1024px to prevent overlap */}
+      <nav className="hidden lg:flex items-center gap-4 xl:gap-8 flex-shrink-0">
+        <a href="#" className="text-sm font-medium text-gray-300 transition-colors hover:text-[#B8860B]">Home</a>
+        <span className="text-sm font-medium text-gray-300 transition-colors hover:text-[#B8860B] cursor-default whitespace-nowrap">Privacy Policy</span>
+        <span className="text-sm font-medium text-gray-300 transition-colors hover:text-[#B8860B] cursor-default whitespace-nowrap">Terms of Service</span>
+        <span className="text-sm font-medium text-gray-300 transition-colors hover:text-[#B8860B] cursor-default whitespace-nowrap">Shop</span>
+        <span className="text-sm font-medium text-gray-300 transition-colors hover:text-[#B8860B] cursor-default whitespace-nowrap">Press kit</span>
+        <span className="text-sm font-medium text-gray-300 transition-colors hover:text-[#B8860B] cursor-default whitespace-nowrap">About</span>
       </nav>
 
-      {/* Mobile Menu Button (Three Dots) - Visible only on mobile */}
-      <div className="md:hidden flex items-center">
+      {/* Mobile/Tablet Menu Button */}
+      <div className="lg:hidden flex items-center">
         <button
           type="button"
-          className="inline-flex items-center justify-center p-2 rounded-md text-gray-300 hover:text-[#B8860B] hover:bg-[#B8860B]/10 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#B8860B] transition-colors"
-          aria-expanded="false"
+          className="inline-flex items-center justify-center p-2 rounded-md text-gray-300 hover:text-[#B8860B] hover:bg-[#B8860B]/10 focus:outline-none focus:ring-2 focus:ring-[#B8860B] transition-colors"
           onClick={() => {
-            // Add your mobile menu toggle logic here
             const mobileMenu = document.getElementById('mobile-menu');
-            if (mobileMenu) {
-              mobileMenu.classList.toggle('hidden');
-            }
+            if (mobileMenu) mobileMenu.classList.toggle('hidden');
           }}
         >
           <span className="sr-only">Open main menu</span>
-          {/* Three dots icon */}
-          <svg
-            className="h-6 w-6"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            aria-hidden="true"
-          >
+          <svg className="h-7 w-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <circle cx="12" cy="5" r="2" fill="currentColor" />
             <circle cx="12" cy="12" r="2" fill="currentColor" />
             <circle cx="12" cy="19" r="2" fill="currentColor" />
@@ -114,34 +81,20 @@ export default function Page() {
       </div>
     </div>
 
-    {/* Mobile Menu - Hidden by default, appears when three dots are clicked */}
-    <div id="mobile-menu" className="hidden md:hidden py-4 border-t border-[#B8860B]/20 mt-4">
-      <nav className="flex flex-col space-y-3">
-        <a
-          href=""
-          className="text-sm font-medium text-gray-300 hover:text-[#B8860B] px-3 py-2 rounded-md hover:bg-[#B8860B]/10 transition-colors"
-        >
-          Home
-        </a>
-        <span className="text-sm font-medium text-gray-300 hover:text-[#B8860B] px-3 py-2 rounded-md hover:bg-[#B8860B]/10 transition-colors cursor-default">
-          Privacy Policy
-        </span>
-        <span className="text-sm font-medium text-gray-300 hover:text-[#B8860B] px-3 py-2 rounded-md hover:bg-[#B8860B]/10 transition-colors cursor-default">
-          Terms of Service
-        </span>
-        <span className="text-sm font-medium text-gray-300 hover:text-[#B8860B] px-3 py-2 rounded-md hover:bg-[#B8860B]/10 transition-colors cursor-default">
-          Shop
-        </span>
-        <span className="text-sm font-medium text-gray-300 hover:text-[#B8860B] px-3 py-2 rounded-md hover:bg-[#B8860B]/10 transition-colors cursor-default">
-          Press kit
-        </span>
-        <span className="text-sm font-medium text-gray-300 hover:text-[#B8860B] px-3 py-2 rounded-md hover:bg-[#B8860B]/10 transition-colors cursor-default">
-          About
-        </span>
+    {/* Mobile Menu Dropdown */}
+    <div id="mobile-menu" className="hidden lg:hidden py-4 border-t border-[#B8860B]/20">
+      <nav className="flex flex-col space-y-1">
+        <a href="#" className="text-base font-medium text-gray-300 hover:text-[#B8860B] px-4 py-3 rounded-md hover:bg-[#B8860B]/10 transition-colors">Home</a>
+        <span className="text-base font-medium text-gray-300 hover:text-[#B8860B] px-4 py-3 rounded-md hover:bg-[#B8860B]/10 transition-colors cursor-default">Privacy Policy</span>
+        <span className="text-base font-medium text-gray-300 hover:text-[#B8860B] px-4 py-3 rounded-md hover:bg-[#B8860B]/10 transition-colors cursor-default">Terms of Service</span>
+        <span className="text-base font-medium text-gray-300 hover:text-[#B8860B] px-4 py-3 rounded-md hover:bg-[#B8860B]/10 transition-colors cursor-default">Shop</span>
+        <span className="text-base font-medium text-gray-300 hover:text-[#B8860B] px-4 py-3 rounded-md hover:bg-[#B8860B]/10 transition-colors cursor-default">Press kit</span>
+        <span className="text-base font-medium text-gray-300 hover:text-[#B8860B] px-4 py-3 rounded-md hover:bg-[#B8860B]/10 transition-colors cursor-default">About</span>
       </nav>
     </div>
   </div>
 </header>
+
       <br /><br /><br /><br />
       <div className="w-full bg-[#0A0A0A] border-y border-[#B8860B]/20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -230,9 +183,6 @@ export default function Page() {
         </div>
       </div>
 
-
-
-
       {/* Hero Section */}
       <section id="hero" className="relative w-full overflow-hidden pt-6 pb-10 sm:pt-10 sm:pb-16 lg:pt-12 lg:pb-20" style={{ backgroundColor: '#0A0A0A' }}>
         <div className="absolute inset-0 overflow-hidden">
@@ -243,9 +193,7 @@ export default function Page() {
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             {/* Main Title - Significantly increased */}
-            <h1 className="text-balance text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-7xl font-bold tracking-tight text-white mt-7 sm:mt-8 md:mt-10 lg:mt-8 mb-4">
-              Rebel Echo Records
-            </h1>
+            <br />
             <br />
 
             {/* Subtitle - Adjusted proportionally */}
@@ -431,18 +379,13 @@ export default function Page() {
           {/* Judy Briggs Tracks Grid - Responsive columns */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 max-w-5xl mx-auto px-4 sm:px-0">
             {tracks.map((track, index) => (
-              <AudioCard
+              <SpotifyCard
                 key={index}
                 track={track}
                 index={index}
-                isPlaying={currentlyPlaying === index}
-                onPlay={() => setCurrentlyPlaying(index)}
-                onStop={() => setCurrentlyPlaying(null)}
               />
             ))}
           </div>
-
-
         </div>
       </section>
 
@@ -457,158 +400,110 @@ export default function Page() {
 
           {/* Email Contacts Section */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            <p className="text-xs sm:text-sm text-gray-400">
-              <span className="font-bold text-white">Founder & Creative Director:</span> james@rebelechrecords.com
-            </p>
-            <p className="text-xs sm:text-sm text-gray-400">
-              <span className="font-bold text-white">General / Artist Contact:</span> jsoul@rebelechrecords.com
-            </p>
-            <p className="text-xs sm:text-sm text-gray-400">
-              <span className="font-bold text-white">Artist Contact – Judy Briggs:</span> judy@rebelechrecords.com
-            </p>
-            <p className="text-xs sm:text-sm text-gray-400">
-              <span className="font-bold text-white">Business & Strategy:</span> vox@rebelechrecords.com
-            </p>
-            <p className="text-xs sm:text-sm text-gray-400">
-              <span className="font-bold text-white">Sales & Engagement:</span> sales@rebelechrecords.com
-            </p>
-            <p className="text-xs sm:text-sm text-gray-400">
-              <span className="font-bold text-white">Digital & Social Media:</span> emily@rebelechrecords.com
-            </p>
-          </div>
+  <p className="text-xs sm:text-sm text-gray-400">
+    <span className="font-bold text-white">Founder & Creative Director:</span>{" "}
+    <a 
+      href="https://mail.google.com/mail/?view=cm&fs=1&to=james@rebelechorecords.com" 
+      target="_blank" 
+      rel="noopener noreferrer"
+      className="hover:text-white transition-colors duration-200"
+    >
+      james@rebelechorecords.com
+    </a>
+  </p>
+  <p className="text-xs sm:text-sm text-gray-400">
+    <span className="font-bold text-white">General / Artist Contact:</span>{" "}
+    <a 
+      href="https://mail.google.com/mail/?view=cm&fs=1&to=jsoul@rebelechorecords.com" 
+      target="_blank" 
+      rel="noopener noreferrer"
+      className="hover:text-white transition-colors duration-200"
+    >
+      jsoul@rebelechorecords.com
+    </a>
+  </p>
+  <p className="text-xs sm:text-sm text-gray-400">
+    <span className="font-bold text-white">Artist Contact – Judy Briggs:</span>{" "}
+    <a 
+      href="https://mail.google.com/mail/?view=cm&fs=1&to=judy@rebelechorecords.com" 
+      target="_blank" 
+      rel="noopener noreferrer"
+      className="hover:text-white transition-colors duration-200"
+    >
+      judy@rebelechorecords.com
+    </a>
+  </p>
+  <p className="text-xs sm:text-sm text-gray-400">
+    <span className="font-bold text-white">Business & Strategy:</span>{" "}
+    <a 
+      href="https://mail.google.com/mail/?view=cm&fs=1&to=vox@rebelechorecords.com" 
+      target="_blank" 
+      rel="noopener noreferrer"
+      className="hover:text-white transition-colors duration-200"
+    >
+      vox@rebelechorecords.com
+    </a>
+  </p>
+  <p className="text-xs sm:text-sm text-gray-400">
+    <span className="font-bold text-white">Sales & Engagement:</span>{" "}
+    <a 
+      href="https://mail.google.com/mail/?view=cm&fs=1&to=sales@rebelechorecords.com" 
+      target="_blank" 
+      rel="noopener noreferrer"
+      className="hover:text-white transition-colors duration-200"
+    >
+      sales@rebelechorecords.com
+    </a>
+  </p>
+  <p className="text-xs sm:text-sm text-gray-400">
+    <span className="font-bold text-white">Digital & Social Media:</span>{" "}
+    <a 
+      href="https://mail.google.com/mail/?view=cm&fs=1&to=emily@rebelechorecords.com" 
+      target="_blank" 
+      rel="noopener noreferrer"
+      className="hover:text-white transition-colors duration-200"
+    >
+      emily@rebelechorecords.com
+    </a>
+  </p>
+</div>
         </div>
 
         {/* Absolute Bottom Copyright */}
         <div className="border-t border-[#B8860B]/20">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
-            <p className="text-xs sm:text-sm text-gray-400 text-center">
-              ©️ 2026 - Rebel Echo Records
-            </p>
-          </div>
-        </div>
+  <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
+    <p className="text-xs sm:text-sm text-gray-400 text-center">
+      ©️ 2026 - Rebel Echo Records
+    </p>
+    <p className="text-xs sm:text-sm text-gray-400 text-center mt-2">
+      Developed by{' '}
+      <a 
+        href="https://www.fiverr.com/sellers/ahmedbinqamar11/edit" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="text-[#B8860B] hover:text-[#DAA520] transition-colors duration-200"
+      >
+        Ahmed Bin Qamar
+      </a>
+    </p>
+  </div>
+</div>
       </footer>
     </div>
   );
 }
 
 /* =========================================================
-   🎵 PROFESSIONAL AUDIO CARD COMPONENT - FULLY RESPONSIVE
+   🎵 SPOTIFY CARD COMPONENT - FULLY RESPONSIVE
 ========================================================= */
 
-function AudioCard({
+function SpotifyCard({
   track,
-  index,
-  isPlaying,
-  onPlay,
-  onStop
+  index
 }: {
   track: Track;
   index: number;
-  isPlaying: boolean;
-  onPlay: () => void;
-  onStop: () => void;
 }) {
-  const audioRef = useRef<HTMLAudioElement>(null);
-  const progressRef = useRef<HTMLDivElement>(null);
-
-  const [isMuted, setIsMuted] = useState(false);
-  const [duration, setDuration] = useState(0);
-  const [current, setCurrent] = useState(0);
-  const [volume, setVolume] = useState(1);
-  const [showVolumeControl, setShowVolumeControl] = useState(false);
-
-  const formatTime = (time: number): string => {
-    if (!time || isNaN(time)) return "0:00";
-    const m = Math.floor(time / 60);
-    const s = Math.floor(time % 60).toString().padStart(2, "0");
-    return `${m}:${s}`;
-  };
-
-  // load metadata and handle playback
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    const updateTime = () => setCurrent(audio.currentTime);
-    const loaded = () => setDuration(audio.duration);
-    const ended = () => {
-      onStop();
-      setCurrent(0);
-    };
-
-    audio.addEventListener("timeupdate", updateTime);
-    audio.addEventListener("loadedmetadata", loaded);
-    audio.addEventListener("ended", ended);
-
-    return () => {
-      audio.removeEventListener("timeupdate", updateTime);
-      audio.removeEventListener("loadedmetadata", loaded);
-      audio.removeEventListener("ended", ended);
-    };
-  }, [onStop]);
-
-  // Handle play/pause based on isPlaying prop
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    if (isPlaying) {
-      audio.play().catch(error => {
-        console.log("Playback failed:", error);
-        onStop();
-      });
-    } else {
-      audio.pause();
-    }
-  }, [isPlaying, onStop]);
-
-  const togglePlay = () => {
-    if (isPlaying) {
-      onStop();
-    } else {
-      onPlay();
-    }
-  };
-
-  const stopAudio = () => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    audio.pause();
-    audio.currentTime = 0;
-    onStop();
-  };
-
-  const toggleMute = () => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    audio.muted = !isMuted;
-    setIsMuted(!isMuted);
-  };
-
-  const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    const newVolume = parseFloat(e.target.value);
-    audio.volume = newVolume;
-    setVolume(newVolume);
-    setIsMuted(newVolume === 0);
-  };
-
-  const handleSeek = (e: React.MouseEvent<HTMLDivElement>) => {
-    const progress = progressRef.current;
-    const audio = audioRef.current;
-    if (!progress || !audio || !duration) return;
-
-    const rect = progress.getBoundingClientRect();
-    const percent = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-    audio.currentTime = percent * duration;
-  };
-
-  const progressPercent = duration ? (current / duration) * 100 : 0;
-
   return (
     <div className="group relative">
       {/* Background gradient effect */}
@@ -616,8 +511,6 @@ function AudioCard({
 
       {/* Main card */}
       <div className="relative bg-[#111111] rounded-2xl border border-[#B8860B]/20 overflow-hidden hover:border-[#B8860B]/40 transition-all duration-300">
-        <audio ref={audioRef} src={track.src} preload="metadata" />
-
         {/* Card Header with Track Number */}
         <div className="flex items-center justify-between px-4 sm:px-6 pt-4 sm:pt-6 pb-1 sm:pb-2">
           <div className="flex items-center gap-2 sm:gap-3">
@@ -629,108 +522,40 @@ function AudioCard({
 
         <div className="p-4 sm:p-6 pt-1 sm:pt-2">
           <div className="flex flex-col xs:flex-row items-start gap-4 sm:gap-5">
-            {/* Album Art with Play Button Overlay */}
-            <div className="relative w-20 h-20 sm:w-24 sm:h-24 flex-shrink-0 group/image mx-auto xs:mx-0">
+            {/* Album Art */}
+            <div className="relative w-20 h-20 sm:w-24 sm:h-24 flex-shrink-0 mx-auto xs:mx-0">
               <div className="absolute inset-0 bg-gradient-to-br from-[#B8860B] to-[#800080] rounded-xl blur-sm opacity-50"></div>
               <div className="relative w-full h-full rounded-xl overflow-hidden ring-2 ring-[#800080]/30">
                 <img
                   src={track.thumbnail}
                   alt={track.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover/image:scale-110"
+                  className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/image:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                  <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-[#B8860B] flex items-center justify-center">
-                    <span className="text-black text-xs">▶</span>
-                  </div>
-                </div>
               </div>
             </div>
 
-            {/* Track Info */}
+            {/* Track Info with Spotify Link */}
             <div className="flex-1 min-w-0 w-full xs:w-auto">
               <h3 className="text-base sm:text-lg md:text-xl font-bold text-white mb-1 truncate text-center xs:text-left">
                 {track.title}
               </h3>
-              <p className="text-xs sm:text-sm text-gray-400 mb-2 sm:mb-3 text-center xs:text-left">
+              <p className="text-xs sm:text-sm text-gray-400 mb-3 sm:mb-4 text-center xs:text-left">
                 {track.artist}
               </p>
 
-              {/* Progress Bar - Touch friendly */}
-              <div
-                ref={progressRef}
-                onClick={handleSeek}
-                className="relative h-2 sm:h-1.5 bg-[#800080]/20 rounded-full overflow-hidden cursor-pointer group/progress mb-2 sm:mb-3"
-              >
-                <div
-                  className="absolute left-0 top-0 h-full bg-gradient-to-r from-[#B8860B] to-[#800080] rounded-full transition-all duration-100"
-                  style={{ width: `${progressPercent}%` }}
-                />
-                <div
-                  className="absolute top-1/2 -translate-y-1/2 w-2 h-2 sm:w-3 sm:h-3 bg-[#B8860B] rounded-full opacity-0 group-hover/progress:opacity-100 transition-opacity shadow-lg"
-                  style={{ left: `calc(${progressPercent}% - 4px)` }}
-                />
-              </div>
-
-              {/* Time Display */}
-              <div className="flex justify-between text-[10px] sm:text-xs text-gray-500 mb-2 sm:mb-3">
-                <span>{formatTime(current)}</span>
-                <span>{formatTime(duration)}</span>
-              </div>
-
-              {/* Controls - Responsive sizing */}
-              <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap justify-center xs:justify-start">
-                <button
-                  onClick={togglePlay}
-                  className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gradient-to-r from-[#B8860B] to-[#800080] text-white flex items-center justify-center hover:shadow-lg hover:shadow-[#B8860B]/20 transition-all transform hover:scale-105 text-sm sm:text-base"
+              {/* Spotify Link Button */}
+              <div className="flex justify-center xs:justify-start">
+                <a
+                  href={track.spotifyUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-[#1DB954] hover:bg-[#1ed760] text-white text-sm sm:text-base font-medium rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-[#1DB954]/25"
                 >
-                  {isPlaying ? "⏸" : "▶"}
-                </button>
-
-                <button
-                  onClick={stopAudio}
-                  className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#222222] text-gray-400 hover:text-white hover:bg-[#333333] transition-colors flex items-center justify-center text-sm sm:text-base"
-                >
-                  ⏹
-                </button>
-
-                <div className="relative">
-                  <button
-                    onClick={toggleMute}
-                    onMouseEnter={() => setShowVolumeControl(true)}
-                    onMouseLeave={() => setShowVolumeControl(false)}
-                    className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#222222] text-gray-400 hover:text-white hover:bg-[#333333] transition-colors flex items-center justify-center text-sm sm:text-base"
-                  >
-                    {isMuted ? "🔇" : volume > 0.7 ? "🔊" : volume > 0.3 ? "🔉" : "🔈"}
-                  </button>
-
-                  {/* Volume Slider Popup - Responsive positioning */}
-                  {showVolumeControl && (
-                    <div
-                      className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 p-1.5 sm:p-2 bg-[#222222] rounded-lg border border-[#B8860B]/30 shadow-xl z-50"
-                      onMouseEnter={() => setShowVolumeControl(true)}
-                      onMouseLeave={() => setShowVolumeControl(false)}
-                    >
-                      <input
-                        type="range"
-                        min="0"
-                        max="1"
-                        step="0.01"
-                        value={volume}
-                        onChange={handleVolumeChange}
-                        className="w-16 sm:w-20 h-1 bg-[#800080]/30 rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-2 [&::-webkit-slider-thumb]:h-2 sm:[&::-webkit-slider-thumb]:w-3 sm:[&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[#B8860B]"
-                      />
-                    </div>
-                  )}
-                </div>
-
-                {/* Waveform indicator when playing */}
-                {isPlaying && (
-                  <div className="ml-auto hidden xs:flex items-center gap-0.5">
-                    <div className="w-0.5 h-2 sm:h-3 bg-[#B8860B] animate-pulse"></div>
-                    <div className="w-0.5 h-3 sm:h-4 bg-[#800080] animate-pulse delay-75"></div>
-                    <div className="w-0.5 h-1.5 sm:h-2 bg-[#B8860B] animate-pulse delay-150"></div>
-                  </div>
-                )}
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141 4.14-1.26 9.479-.6 13.14 1.56.42.24.6.84.341 1.26zm.12-3.36c-3.84-2.28-10.14-2.52-13.74-1.38-.6.18-1.26-.18-1.44-.78-.18-.6.18-1.26.78-1.44 4.14-1.26 11.04-1.02 15.36 1.62.54.3.72 1.02.42 1.56-.3.48-1.02.66-1.56.36z" />
+                  </svg>
+                  <span>Listen on Spotify</span>
+                </a>
               </div>
             </div>
           </div>
