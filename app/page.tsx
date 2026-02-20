@@ -349,7 +349,7 @@ export default function Page() {
 
                     <div className="space-y-4 sm:space-y-6 text-gray-300 max-w-4xl mx-auto">
                       <p className="text-base sm:text-lg leading-relaxed text-justify">
-                        <span className="font-semibold text-[#B8860B]">Rebel Echo Records</span> proudly announces the upcoming release of <span className="font-semibold text-[#800080]">Poetic Metal</span>, arriving <span className="font-semibold text-[#B8860B]">March 10, 2026</span>.
+                        <span className="font-semibold text-[#B8860B]">Rebel Echo Records</span> proudly announces the upcoming release of <span className="font-semibold text-[#E0BBE4]">Poetic Metal</span>, arriving <span className="font-semibold text-[#B8860B]">March 10, 2026</span>.
                       </p>
 
                       <p className="text-sm sm:text-base leading-relaxed text-justify">
