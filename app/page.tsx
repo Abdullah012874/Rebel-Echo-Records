@@ -284,7 +284,7 @@ export default function Page() {
             </div>
             
             
-            <br />
+            
 
             {/* Subtitle - Adjusted proportionally */}
             <p 
