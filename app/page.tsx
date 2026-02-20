@@ -275,19 +275,28 @@ export default function Page() {
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             {/* Main Logo at Top */}
+            <div className="flex justify-center mb-8">
+              <img
+                src="/images/Picture1.1.png"
+                alt="Rebel Echo Records Logo"
+                className="h-24 w-auto sm:h-28 md:h-32 lg:h-40 xl:h-48 object-contain filter drop-shadow-[0_0_20px_rgba(184,134,11,0.3)] hover:drop-shadow-[0_0_30px_rgba(184,134,11,0.5)] transition-all duration-300"
+              />
+            </div>
             
             
-            <br />
             <br />
 
             {/* Subtitle - Adjusted proportionally */}
-            <p className="text-sm sm:text-base text-gray-300 leading-relaxed mb-4 text-center">
-              <span className="font-semibold text-[#B8860B]">Rebel Echo Records (RER)</span> is an independent label rooted in conviction, resilience, and artistic truth.
+            <p 
+  className="text-sm sm:text-base text-gray-300 leading-relaxed mb-4 text-center"
+  style={{ maxWidth: '900px', margin: '0 auto 1rem auto' }}
+>
+  <span className="font-semibold text-[#B8860B]">Rebel Echo Records (RER)</span> is an independent label rooted in conviction, resilience, and artistic truth.
 
-              Home of <span className="font-semibold text-[#800080]">J'Soul</span>, featuring new and upcoming artists, including <span className="font-semibold text-[#B8860B]">Judy Briggs</span>.
+  Home of <span className="font-semibold text-[#E0BBE4]">J'Soul</span>, featuring new and upcoming artists, including <span className="font-semibold text-[#B8860B]">Judy Briggs</span>.
 
-              RER exists at the intersection of faith, fire, vulnerability, and strength. We build music that confronts, restores, and refuses to compromise.
-            </p>
+  RER exists at the intersection of faith, fire, vulnerability, and strength. We build music that confronts, restores, and refuses to compromise.
+</p>
 
             {/* COUNTDOWN TIMER - SMALLER VERSION INSERTED HERE */}
 
