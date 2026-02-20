@@ -274,12 +274,13 @@ export default function Page() {
         </div>
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            {/* Main Title - Significantly increased */}
+            {/* Main Logo at Top */}
+            
+            
             <br />
             <br />
 
             {/* Subtitle - Adjusted proportionally */}
-
             <p className="text-sm sm:text-base text-gray-300 leading-relaxed mb-4 text-center">
               <span className="font-semibold text-[#B8860B]">Rebel Echo Records (RER)</span> is an independent label rooted in conviction, resilience, and artistic truth.
 
@@ -289,7 +290,6 @@ export default function Page() {
             </p>
 
             {/* COUNTDOWN TIMER - SMALLER VERSION INSERTED HERE */}
-
 
             <br />
             {/* J'Soul section - Larger and more prominent */}
@@ -309,7 +309,7 @@ export default function Page() {
                 </div>
               </div>
             </div>
-
+                  <CountdownTimer />
             {/* Removed empty divs but kept structure clean */}
             <div className="mt-4 space-y-2 px-4">
               {/* Empty div removed - kept for potential future content */}
@@ -332,9 +332,7 @@ export default function Page() {
                 <div>
                   <div className="bg-[#111111] border border-[#B8860B]/20 rounded-2xl p-4 sm:p-6 md:p-8 lg:p-10">
                     <div className="text-center mb-6 sm:mb-8">
-                      <span className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 bg-[#800080]/20 text-[#B8860B] font-semibold rounded-full text-xs sm:text-sm mb-3 sm:mb-4">
-                        FOR IMMEDIATE RELEASE
-                      </span>
+                      
                       <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-3 sm:mb-4 px-2">
                         J'Soul Announces "Poetic Metal" – A Genre-Defying Testament of Faith, Resilience, and Family
                       </h3>
@@ -348,7 +346,7 @@ export default function Page() {
                       <p className="text-sm sm:text-base leading-relaxed text-justify">
                         Blending Christian metal, poetic lyricism, rap influence, and emotionally grounded storytelling, Poetic Metal explores endurance in relationships, spiritual guidance through adversity, mental health recovery, and unwavering family bonds.
                       </p>
-                      <CountdownTimer />
+                      
                       {/* Spotify Link with Logo */}
                       <div className="flex items-center justify-center gap-3 mt-6 pt-4 border-t border-[#B8860B]/20">
                         {/* PASTE YOUR SPOTIFY LOGO URL BELOW */}
@@ -381,7 +379,7 @@ export default function Page() {
                       <div className="bg-[#111111] rounded-2xl overflow-hidden">
                         <div className="aspect-[4/4] relative">
                           <img
-                            src="/images/Picture2.png"
+                            src="/images/metal.jpeg"
                             alt="J'Soul - Artist at Rebel Echo Records"
                             className="w-full h-full object-cover"
                           />
@@ -477,82 +475,81 @@ export default function Page() {
       {/* Footer */}
       <footer id="footer" className="w-full scroll-mt-20" style={{ backgroundColor: '#0A0A0A' }}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-12 lg:py-16">
+  {/* Contacts Heading - No underline */}
+  <h2 className="text-xl sm:text-2xl font-semibold text-[#B8860B] mb-6 sm:mb-8 tracking-wide">
+    Contacts
+  </h2>
 
-          {/* Contacts Heading - No underline */}
-          <h2 className="text-xl sm:text-2xl font-semibold text-[#B8860B] mb-6 sm:mb-8 tracking-wide">
-            Contacts
-          </h2>
-
-          {/* Email Contacts Section */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            <p className="text-xs sm:text-sm text-gray-400">
-              <span className="font-bold text-white">Founder & Creative Director:</span>{" "}
-              <a
-                href="https://mail.google.com/mail/?view=cm&fs=1&to=james@rebelechorecords.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-white transition-colors duration-200"
-              >
-                james@rebelechorecords.com
-              </a>
-            </p>
-            <p className="text-xs sm:text-sm text-gray-400">
-              <span className="font-bold text-white">General / Artist Contact:</span>{" "}
-              <a
-                href="https://mail.google.com/mail/?view=cm&fs=1&to=jsoul@rebelechorecords.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-white transition-colors duration-200"
-              >
-                jsoul@rebelechorecords.com
-              </a>
-            </p>
-            <p className="text-xs sm:text-sm text-gray-400">
-              <span className="font-bold text-white">Artist Contact – Judy Briggs:</span>{" "}
-              <a
-                href="https://mail.google.com/mail/?view=cm&fs=1&to=judy@rebelechorecords.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-white transition-colors duration-200"
-              >
-                judy@rebelechorecords.com
-              </a>
-            </p>
-            <p className="text-xs sm:text-sm text-gray-400">
-              <span className="font-bold text-white">Business & Strategy:</span>{" "}
-              <a
-                href="https://mail.google.com/mail/?view=cm&fs=1&to=vox@rebelechorecords.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-white transition-colors duration-200"
-              >
-                vox@rebelechorecords.com
-              </a>
-            </p>
-            <p className="text-xs sm:text-sm text-gray-400">
-              <span className="font-bold text-white">Sales & Engagement:</span>{" "}
-              <a
-                href="https://mail.google.com/mail/?view=cm&fs=1&to=sales@rebelechorecords.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-white transition-colors duration-200"
-              >
-                sales@rebelechorecords.com
-              </a>
-            </p>
-            <p className="text-xs sm:text-sm text-gray-400">
-              <span className="font-bold text-white">Digital & Social Media:</span>{" "}
-              <a
-                href="https://mail.google.com/mail/?view=cm&fs=1&to=emily@rebelechorecords.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-white transition-colors duration-200"
-              >
-                emily@rebelechorecords.com
-              </a>
-            </p>
-          </div>
-        </div>
+  {/* Email Contacts Section */}
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+    <p className="text-xs sm:text-sm text-gray-400">
+      <span className="font-bold text-white">Founder & Creative Director:</span>{" "}
+      <a
+        href="mailto:james@rebelechorecords.com"
+        
+        rel="noopener noreferrer"
+        className="hover:text-white transition-colors duration-200"
+      >
+        james@rebelechorecords.com
+      </a>
+    </p>
+    <p className="text-xs sm:text-sm text-gray-400">
+      <span className="font-bold text-white">General / Artist Contact:</span>{" "}
+      <a
+        href="mailto:jsoul@rebelechorecords.com"
+        
+        rel="noopener noreferrer"
+        className="hover:text-white transition-colors duration-200"
+      >
+        jsoul@rebelechorecords.com
+      </a>
+    </p>
+    <p className="text-xs sm:text-sm text-gray-400">
+      <span className="font-bold text-white">Artist Contact – Judy Briggs:</span>{" "}
+      <a
+        href="mailto:judy@rebelechorecords.com"
+        
+        rel="noopener noreferrer"
+        className="hover:text-white transition-colors duration-200"
+      >
+        judy@rebelechorecords.com
+      </a>
+    </p>
+    <p className="text-xs sm:text-sm text-gray-400">
+      <span className="font-bold text-white">Business & Strategy:</span>{" "}
+      <a
+        href="mailto:vox@rebelechorecords.com"
+        
+        rel="noopener noreferrer"
+        className="hover:text-white transition-colors duration-200"
+      >
+        vox@rebelechorecords.com
+      </a>
+    </p>
+    <p className="text-xs sm:text-sm text-gray-400">
+      <span className="font-bold text-white">Sales & Engagement:</span>{" "}
+      <a
+        href="mailto:sales@rebelechorecords.com"
+        
+        rel="noopener noreferrer"
+        className="hover:text-white transition-colors duration-200"
+      >
+        sales@rebelechorecords.com
+      </a>
+    </p>
+    <p className="text-xs sm:text-sm text-gray-400">
+      <span className="font-bold text-white">Digital & Social Media:</span>{" "}
+      <a
+        href="mailto:emily@rebelechorecords.com"
+        
+        rel="noopener noreferrer"
+        className="hover:text-white transition-colors duration-200"
+      >
+        emily@rebelechorecords.com
+      </a>
+    </p>
+  </div>
+</div>
         <div className="w-full bg-[#0A0A0A] border-y border-[#B8860B]/20 mt-[80px] sm:mt-[6px]">
   <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <div className="flex items-center justify-center h-16">
@@ -636,7 +633,7 @@ export default function Page() {
             <p className="text-xs sm:text-sm text-gray-400 text-center mt-2">
               Developed by{' '}
               <a
-                href="https://www.fiverr.com/sellers/ahmedbinqamar11/edit"
+                href="https://www.fiverr.com/ahmedbinqamar11"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[#B8860B] hover:text-[#DAA520] transition-colors duration-200"
